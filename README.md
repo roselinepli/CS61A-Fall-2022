@@ -1,5 +1,5 @@
-# CS61A-Fall-2022
-This is my own learning record of CS61A Fall 2022, the course has already finished when I first created this repository.
+# CS61A-Spring-2023
+This is my own learning record of CS61A Spring 2023, actaully I was learning CS61A-Fall-2022 but too late to open all the homework and lab pages, so I'm following the most current one.
 
 course: https://cs61a.org/
 Text: http://composingprograms.com/
