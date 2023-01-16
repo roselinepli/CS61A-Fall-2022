@@ -15,5 +15,5 @@ $ git st
 $ git diff
 
 $ git ci -am "<commit message>"
-$ git push
+$ git push origin main
 ```
