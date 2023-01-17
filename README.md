@@ -1,8 +1,8 @@
-# CS61A-Spring-2023
-This is my own learning record of CS61A Spring 2023, actaully I was learning CS61A-Fall-2022 but too late to open all the homework and lab pages, so I'm following the most current one.
+# CS61A-Fall-2022
+This is my own learning record of CS61A Fall 2022, the course had already finished when I first created the repo.
 
-course: https://inst.eecs.berkeley.edu/~cs61a/fa22/
-Text: http://composingprograms.com/
+* course: https://inst.eecs.berkeley.edu/~cs61a/fa22/
+* Text: http://composingprograms.com/
 
 # Dev
 
