@@ -43,7 +43,7 @@ def tail_points(opponent_score):
 
     """
     # BEGIN PROBLEM 2
-    "*** YOUR CODE HERE ***"
+    return 2 * abs(opponent_score % 10 - (opponent_score//10)%10)
     # END PROBLEM 2
 
 
