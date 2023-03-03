@@ -8,7 +8,7 @@ from gui_files.common_server import route, start
 
 import hog
 import dice
-import default_graphics
+import projects.hog.default_graphics as default_graphics
 
 PORT = 31415
 DEFAULT_SERVER = "https://hog.cs61a.org"
