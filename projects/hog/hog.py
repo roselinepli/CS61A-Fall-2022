@@ -60,7 +60,10 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert num_rolls >= 0, 'Cannot roll a negative number of dice in take_turn.'
     assert num_rolls <= 10, 'Cannot roll more than 10 dice.'
     # BEGIN PROBLEM 3
-    "*** YOUR CODE HERE ***"
+    if num_rolls == 0:
+        return tail_points(opponent_score)
+    else:
+        return roll_dice(num_rolls, dice)
     # END PROBLEM 3
 
 
@@ -83,7 +86,21 @@ def square_update(num_rolls, player_score, opponent_score, dice=six_sided):
 
 
 # BEGIN PROBLEM 4
-"*** YOUR CODE HERE ***"
+def perfect_square(score):
+    d = 0
+    while d*d <= score:
+        if d*d == score:
+            return True
+        d += 1
+    return False
+
+def next_perfect_square(score):
+    d = 0
+    while d*d <= score:
+        if d*d == score:
+            return (d+1) * (d+1)
+        d += 1
+    return (d+1) * (d+1)
 # END PROBLEM 4
 
 
@@ -122,7 +139,14 @@ def play(strategy0, strategy1, update,
     """
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+    while score0 < goal and score1 < goal:
+        if who == 0:
+            dice_num = strategy0(score0, score1)
+            score0 = update(dice_num, score0, score1, dice)
+        else:
+            dice_num = strategy1(score1, score0)
+            score1 = update(dice_num, score1, score0, dice)
+        who = 1 - who
     # END PROBLEM 5
     return score0, score1
 
