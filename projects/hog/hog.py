@@ -321,7 +321,13 @@ def tail_strategy(score, opponent_score, threshold=12, num_rolls=6):
 def square_strategy(score, opponent_score, threshold=12, num_rolls=6):
     """This strategy returns 0 dice when your score would increase by at least threshold."""
     # BEGIN PROBLEM 11
-    return num_rolls  # Remove this line once implemented.
+    if tail_points(opponent_score) >= threshold:
+        return 0
+    else:
+        if perfect_square(score + tail_points(opponent_score)):
+            return 0
+        else:
+            return num_rolls
     # END PROBLEM 11
 
 
