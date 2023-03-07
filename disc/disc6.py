@@ -38,7 +38,9 @@ def filter_iter(iterable, f):
     >>> next(s)
     4
     """
-    pass
+    for elem in iterable:
+        if f(elem):
+            yield elem
 
 def is_prime(n):
     """Returns True if n is a prime number and False otherwise.
@@ -56,3 +58,28 @@ def is_prime(n):
             return False
         return helper(i+1)
     return helper(2)
+
+def primes_gen(n):
+    """Generates primes in decreasing order.
+    >>> pg = primes_gen(7)
+    >>> list(pg)
+    [7, 5, 3, 2]
+    """
+    for num in range(n, 1, -1):
+        if is_prime(num):
+            yield num
+
+
+def preorder(t):
+    """Return a list of the entries in this tree in the order that they would
+    be visited by a preorder traversal (see problem description).
+    >>> numbers = tree(1, [tree(2), tree(3, [tree(4), tree(5)]), tree(6, [tree(7)])])
+    >>> preorder(numbers)
+    [1, 2, 3, 4, 5, 6, 7]
+    >>> preorder(tree(2, [tree(4, [tree(6)])]))
+    [2, 4, 6]
+    """
+    flattened_branches = []
+    for child in branches(t):
+        flattened_branches += preorder(child)
+    return [label(t)] + flattened_branches
