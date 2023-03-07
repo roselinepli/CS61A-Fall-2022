@@ -238,8 +238,15 @@ def make_averaged(original_function, total_samples=1000):
     3.0
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    def averaged_dice(*args):
+        sum = 0.0
+        for i in range(total_samples):
+            cur = original_function(*args)
+            sum += cur
+        return sum/total_samples
+    return averaged_dice
     # END PROBLEM 8
+
 
 
 def max_scoring_num_rolls(dice=six_sided, total_samples=1000):
