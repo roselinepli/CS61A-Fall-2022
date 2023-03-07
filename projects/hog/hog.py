@@ -155,12 +155,10 @@ def play(strategy0, strategy1, update,
     while score0 < goal and score1 < goal:
         if who == 0:
             dice_num = strategy0(score0, score1)
-            score0 = update(dice_num, score0, score1)
-            for i in range(dice_num):
-                dice()
+            score0 = update(dice_num, score0, score1, dice)
         else:
             dice_num = strategy1(score1, score0)
-            score1 = update(dice_num, score1, score0)
+            score1 = update(dice_num, score1, score0, dice)
         who = 1 - who
     # END PROBLEM 5
     return score0, score1
