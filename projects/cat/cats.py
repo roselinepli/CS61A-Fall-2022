@@ -188,7 +188,19 @@ def feline_fixes(typed, source, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    def counts(start, goal, cnt):
+        start_l, goal_l = len(start), len(goal)
+        if cnt > limit:
+            return limit + 1
+        elif start_l == 0 and goal_l == 0:
+            return cnt
+        elif start_l == 0 or goal_l == 0:
+            return min(cnt + abs(start_l - goal_l), limit + 1)
+        elif start[0] == goal[0]:
+            return counts(start[1:], goal[1:], cnt)
+        else:
+            return counts(start[1:], goal[1:], cnt+1)
+    return counts(typed, source, 0)
     # END PROBLEM 6
 
 
