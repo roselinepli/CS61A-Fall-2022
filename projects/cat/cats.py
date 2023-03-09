@@ -203,7 +203,9 @@ def feline_fixes(typed, source, limit):
     return counts(typed, source, 0)
     # END PROBLEM 6
 
+import functools
 
+@functools.lru_cache(None)
 def minimum_mewtations(typed, source, limit):
     """A diff function that computes the edit distance from TYPED to SOURCE.
     This function takes in a string TYPED, a string SOURCE, and a number LIMIT.
@@ -219,22 +221,21 @@ def minimum_mewtations(typed, source, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
-    if ___________:  # Base cases should go here, you may add more base cases as needed.
         # BEGIN
-        "*** YOUR CODE HERE ***"
+    if len(typed) == 0 or len(source) == 0:
+        return min(len(typed) + len(source), limit + 1)
         # END
     # Recursive cases should go below here
-    if ___________:  # Feel free to remove or add additional cases
         # BEGIN
-        "*** YOUR CODE HERE ***"
+    elif typed[0] == source[0]:
+        return min(minimum_mewtations(typed[1:], source[1:], limit), limit + 1)
         # END
     else:
-        add = ...  # Fill in these lines
-        remove = ...
-        substitute = ...
+        add = 1 + minimum_mewtations(typed, source[1:], limit)
+        remove = 1 + minimum_mewtations(typed[1:], source, limit)
+        substitute = 1 + minimum_mewtations(typed[1:], source[1:], limit)
         # BEGIN
-        "*** YOUR CODE HERE ***"
+        return min(add, remove, substitute, limit + 1)
         # END
 
 
