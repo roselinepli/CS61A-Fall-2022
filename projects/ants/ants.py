@@ -208,7 +208,7 @@ class ThrowerAnt(Ant):
             p = p.entrance
             transition += 1
         return None
-        #return random_bee(self.place.bees)  # REPLACE THIS LINE
+        #return random_(self.place.bees)  # REPLACE THIS LINE
         # END Problem 3 and 4
 
     def throw_at(self, target):
@@ -300,7 +300,7 @@ class Wallant(Ant):
 # END Problem 6
 
 # BEGIN Problem 7
-# The HungryAnt Class
+# The HungryAnt Class1
 # END Problem 7
 
 
