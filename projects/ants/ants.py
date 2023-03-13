@@ -292,7 +292,7 @@ class FireAnt(Ant):
 
 # BEGIN Problem 6
 # The WallAnt class
-class Wallant(Ant):
+class WallAnt(Ant):
     name = 'Wall'
     implemented = True
     food_cost = 4
