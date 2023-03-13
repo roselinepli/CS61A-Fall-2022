@@ -52,6 +52,7 @@ class Insect:
     """An Insect, the base class of Ant and Bee, has health and a Place."""
 
     damage = 0
+    is_waterproof = False
     # ADD CLASS ATTRIBUTES HERE
 
     def __init__(self, health, place=None):
@@ -423,9 +424,7 @@ class ScubaThrower(ThrowerAnt):
 # END Problem 11
 
 # BEGIN Problem 12
-
-
-class QueenAnt(Ant):  # You should change this line
+class QueenAnt(ScubaThrower):
 # END Problem 12
     """The Queen of the colony. The game is over if a bee enters her place."""
 
@@ -433,7 +432,7 @@ class QueenAnt(Ant):  # You should change this line
     food_cost = 7
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 12
-    implemented = False   # Change to True to view in the GUI
+    implemented = True   # Change to True to view in the GUI
     # END Problem 12
 
     @classmethod
@@ -443,7 +442,9 @@ class QueenAnt(Ant):  # You should change this line
         returns None otherwise. Remember to call the construct() method of the superclass!
         """
         # BEGIN Problem 12
-        "*** YOUR CODE HERE ***"
+        if not gamestate.queen_exists:
+            gamestate.queen_exists = True
+            return super().construct(gamestate)
         # END Problem 12
 
     def action(self, gamestate):
@@ -451,7 +452,12 @@ class QueenAnt(Ant):  # You should change this line
         in her tunnel.
         """
         # BEGIN Problem 12
-        "*** YOUR CODE HERE ***"
+        super().action(gamestate)
+        p = self.place.exit
+        while p:
+            if p.ant is not None:
+                p.ant.double()
+            p = p.exit
         # END Problem 12
 
     def reduce_health(self, amount):
@@ -459,7 +465,9 @@ class QueenAnt(Ant):  # You should change this line
         remaining, signal the end of the game.
         """
         # BEGIN Problem 12
-        "*** YOUR CODE HERE ***"
+        if amount >= self.health:
+            ants_lose()
+        super().reduce_health(amount)
         # END Problem 12
 
 
@@ -702,7 +710,7 @@ class GameState:
         self.active_bees = []
         self.configure(beehive, create_places)
         # BEGIN Problem 12
-        "*** YOUR CODE HERE ***"
+        self.queen_exists = False
         # END Problem 12
 
     def configure(self, beehive, create_places):
