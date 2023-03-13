@@ -191,6 +191,7 @@ class ThrowerAnt(Ant):
     # ADD/OVERRIDE CLASS ATTRIBUTES HERE
     food_cost = 3
     health = 1
+    lower_bound = 0
     upper_bound = 10000000
 
     def nearest_bee(self):
