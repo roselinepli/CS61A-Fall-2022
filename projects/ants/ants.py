@@ -470,6 +470,9 @@ class QueenAnt(ScubaThrower):
         super().reduce_health(amount)
         # END Problem 12
 
+    def remove_from(self, place):
+        pass
+
 
 class AntRemover(Ant):
     """Allows the player to remove ants from the board in the GUI."""
