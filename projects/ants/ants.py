@@ -170,6 +170,7 @@ class HarvesterAnt(Ant):
 
     name = 'Harvester'
     implemented = True
+    food_cost = 2
     # OVERRIDE CLASS ATTRIBUTES HERE
 
     def action(self, gamestate):
@@ -411,7 +412,7 @@ class Water(Place):
         # END Problem 10
 
 # BEGIN Problem 11
-# The ScubaThrower class
+
 # END Problem 11
 
 # BEGIN Problem 12
