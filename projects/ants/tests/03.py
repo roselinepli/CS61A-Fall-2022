@@ -101,27 +101,21 @@ test = {
           >>> far_place.add_insect(far_bee)
           >>> nearest_bee = thrower.nearest_bee()
           >>> nearest_bee is far_bee
-          03456a09f22295a39ca84d133a26f63d
-          # locked
+          False
           >>> nearest_bee is near_bee
-          c7a88a0ffd3aef026b98eef6e7557da3
-          # locked
+          True
           >>> nearest_bee.health
-          20d533d3e06345c8bd7072212867f2d1
-          # locked
+          2
           >>> thrower.action(gamestate)    # Attack! ThrowerAnts do 1 damage
           >>> near_bee.health
-          d89cf7c79d5a479b0f636734143ed5e6
-          # locked
+          1
           >>> far_bee.health
-          81a7d27d1a4a958871bb97b545b871db
-          # locked
+          3
           >>> thrower.place is ant_place    # Don't change self.place!
-          c7a88a0ffd3aef026b98eef6e7557da3
-          # locked
+          True
           """,
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'multiline': False
         },
         {

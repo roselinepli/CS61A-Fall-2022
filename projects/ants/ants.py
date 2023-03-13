@@ -282,7 +282,7 @@ class FireAnt(Ant):
         """
         # BEGIN Problem 5
         p = self.place
-        for bee in p.bee[:]:
+        for bee in p.bees[:]:
             if self.health <= amount:
                 bee.reduce_health(self.damage + amount)
             else:
