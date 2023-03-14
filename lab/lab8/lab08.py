@@ -40,6 +40,16 @@ class Account:
         assert self.balance > 0 and amount > 0 and self.interest > 0
         "*** YOUR CODE HERE ***"
 
+        if amount <= self.balance:
+            return 0
+
+        cnt = 1
+        money_grow = self.balance
+        if money_grow < amount:
+            money_grow += money_grow * self.interest
+            cnt += 1
+        return cnt
+
 
 class FreeChecking(Account):
     """A bank account that charges for withdrawals, but the first two are free!
