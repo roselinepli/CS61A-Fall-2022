@@ -141,7 +141,18 @@ def funception(func1, start):
     >>> func2_6 = funception(func1, -1)
     >>> func2_6(4)    # Returns None since start < 0
     """
-
+    def func2(stop):
+        i = start
+        total = 1
+        if start < 0:
+            return None
+        if start >= stop:
+            return func1(start)
+        while i < stop:
+            total *= func1(i)
+            i += 1
+        return total
+    return func2
 
 def mul_by_num(num):
     """Returns a function that takes one argument and returns num
