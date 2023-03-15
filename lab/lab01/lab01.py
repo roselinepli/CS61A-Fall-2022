@@ -46,7 +46,14 @@ def divisible_by_k(n, k):
     >>> c
     0
     """
-
+    i = 1
+    length = 0
+    while i <= n:
+        if i % k == 0:
+            print(i)
+            length += 1
+        i += 1
+    return length
 
 def sum_digits(y):
     """Sum all the digits of y.
@@ -83,4 +90,3 @@ def double_eights(n):
     >>> double_eights(80808080)
     False
     """
-
