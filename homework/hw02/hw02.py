@@ -32,6 +32,15 @@ def product(n, term):
     162
     """
     "*** YOUR CODE HERE ***"
+    # sum = 1
+    # for i in range(1, n+1):
+    #     sum *= term(i)
+    # return sum
+    total, k = 1, 1
+    while k <= n:
+        total *= term(k)
+        k += 1
+    return total
 
 
 def accumulate(merger, start, n, term):
@@ -59,6 +68,18 @@ def accumulate(merger, start, n, term):
     16
     """
     "*** YOUR CODE HERE ***"
+    total, k = start, 1
+    while k <= n:
+        total = merger(total, term(k))
+        k += 1
+    return total
+
+def accumulate_reverse(merger, start, n, term):
+    total, k = start, n
+    while k >= 1:
+        total = merger(total, term(k))
+        k -= 1
+    return total
 
 
 def summation_using_accumulate(n, term):
@@ -75,7 +96,7 @@ def summation_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(summation_using_accumulate)).body[0].body]
     ['Expr', 'Return']
     """
-    "*** YOUR CODE HERE ***"
+    return accumulate(add, 0, n, term)
 
 
 def product_using_accumulate(n, term):
@@ -90,9 +111,9 @@ def product_using_accumulate(n, term):
     >>> # If this errors, make sure you have removed the "***YOUR CODE HERE***".
     >>> import inspect, ast
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(product_using_accumulate)).body[0].body]
-    ['Expr', 'Return']
-    """
-    "*** YOUR CODE HERE ***"
+    ['Expr', 'Return']"""
+
+    return accumulate(mul, 1, n, term)
 
 
 def funception(func1, start):
