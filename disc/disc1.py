@@ -67,6 +67,14 @@ def unique_digits(n):
     >>> unique_digits(101) # 0 and 1
     2
     """
+    num = 0
+    while n > 0:
+        last = n % 10
+        n //= 10
+        if not has_digit(n, last):
+            num += 1
+    return num
+
 def has_digit(n, k):
     """Return whether K is a digit in N.
     >>> has_digit(10, 1)
@@ -74,7 +82,9 @@ def has_digit(n, k):
     >>> has_digit(12, 7)
     False
     """
-    if n % k == 0:
-        return True
+    while n > 0:
+        last = n % 10
+        n //= 10
+        if last == k:
+            return True
     return False
-
