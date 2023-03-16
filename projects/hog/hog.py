@@ -23,8 +23,8 @@ def roll_dice(num_rolls, dice=six_sided):
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
 
-    # vals = [dice() for _ in range(num_rolls)]
-    # return 1 if 1 in vals else sum(vals)
+    vals = [dice() for _ in range(num_rolls)]
+    return 1 if 1 in vals else sum(vals)
 
     # has_one = False
     # total = 0
@@ -34,17 +34,17 @@ def roll_dice(num_rolls, dice=six_sided):
     #     total += v
     # return 1 if has_one else total
 
-    total = 0
-    sow_sad = False
-    for i in range(num_rolls):
-        current_dice = dice()
-        if current_dice == 1:
-            sow_sad = True
-        total += current_dice
+    # total = 0
+    # sow_sad = False
+    # for i in range(num_rolls):
+    #     current_dice = dice()
+    #     if current_dice == 1:
+    #         sow_sad = True
+    #     total += current_dice
 
-    if sow_sad:
-        total = 1
-    return total
+    # if sow_sad:
+    #     total = 1
+    # return total
 
     # END PROBLEM 1
 
