@@ -17,6 +17,7 @@ def make_keeper(n):
             i += 1
     return do_keep
 
+
 def curry(func):
     """
     Returns a Curried version of a two_argument function FUNC.
@@ -37,6 +38,7 @@ def curry(func):
             return func(arg1, arg2)
         return second
     return first
+
 
 def f1():
     """
@@ -83,6 +85,7 @@ def lambda_curry2(func):
     3
     """
     return lambda arg1: lambda arg2: func(arg1, arg2)
+
 
 def match_k_alt(k):
     """ Return a function that checks if digits k apart match
