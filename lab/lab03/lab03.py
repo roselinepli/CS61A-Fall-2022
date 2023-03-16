@@ -28,7 +28,12 @@ def ordered_digits(x):
     False
 
     """
-    "*** YOUR CODE HERE ***"
+    last = x % 10
+    x = x // 10
+    while x > 0 and last >= x % 10:
+        last = x % 10
+        x = x // 10
+    return x == 0
 
 
 def get_k_run_starter(n, k):
