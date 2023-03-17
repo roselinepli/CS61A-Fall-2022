@@ -30,50 +30,7 @@ def curry(func):
 
 
 
-def f1():
-    """
-    >>> f1()
-    3
-    """
-    return 3
-
-def f2():
-    """
-    >>> f2()()
-    3
-    """
-    return lambda: 3
-
-def f3():
-    """
-    >>> f3()(3)
-    3
-    """
-    return lambda x: x
-
-def f4():
-    """
-    >>> f4()()(3)()
-    3
-    """
-
-
-
 def lambda_curry2(func):
-    """
-    Returns a Curried version of a two-argument function FUNC.
-    >>> from operator import add, mul, mod
-    >>> curried_add = lambda_curry2(add)
-    >>> add_three = curried_add(3)
-    >>> add_three(5)
-    8
-    >>> curried_mul = lambda_curry2(mul)
-    >>> mul_5 = curried_mul(5)
-    >>> mul_5(42)
-    210
-    >>> lambda_curry2(mod)(123)(10)
-    3
-    """
 
 
 
@@ -95,3 +52,10 @@ def match_k_alt(k):
     >>> match_k_alt(2)(123123)
     False
     """
+    def check(x):
+        while x // (10**k):
+            if (x % 10) != (x // (10**k)) % 10:
+                return False
+            x //= 10
+        return True
+    return check

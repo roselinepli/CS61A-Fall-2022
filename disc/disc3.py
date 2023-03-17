@@ -3,7 +3,9 @@ def multiply(m, n):
     >>> multiply(5, 3)
     15
     """
-
+    if n == 1:
+        return m
+    return m + multiply(m, n-1)
 
 
 def is_prime(n):
@@ -16,7 +18,15 @@ def is_prime(n):
     >>> is_prime(521)
     True
     """
-
+    if n == 1:
+        return False
+    def helper(i):
+        if i == n:
+            return True
+        elif n % i == 0:
+            return False
+        return helper(i + 1)
+    return helper(2)
 
 
 def hailstone(n):
@@ -36,7 +46,13 @@ def hailstone(n):
     >>> b
     1
     """
-
+    print(n)
+    if n == 1:
+        return 1
+    elif n % 2 == 0:
+        return 1 + hailstone(n//2)
+    else:
+        return 1 + hailstone(n*3 + 1)
 
 
 def merge(n1, n2):
@@ -48,3 +64,11 @@ def merge(n1, n2):
     >>> merge (21, 31)
     3211
     """
+    if n1 == 0:
+        return n2
+    elif n2 == 0:
+        return n1
+    elif n1 % 10 >= n2 % 10:
+        return merge(n1, n2//10) * 10 + n2 % 10
+    else:
+        return merge(n1//10, n2) * 10 + n1 % 10

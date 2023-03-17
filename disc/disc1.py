@@ -1,7 +1,6 @@
 def is_prime(n):
 
 
-
 def is_prime(n):
     def helper(i):
         if i == n:
@@ -60,6 +59,7 @@ def unique_digits(n):
     >>> unique_digits(101) # 0 and 1
     2
     """
+
 
 
 def has_digit(n, k):
