@@ -9,13 +9,7 @@ def make_keeper(n):
     2
     4
     """
-    def do_keep(cond):
-        i = 1
-        while i <= n:
-            if cond(i):
-                print(i)
-            i += 1
-    return do_keep
+
 
 
 def curry(func):
@@ -33,11 +27,7 @@ def curry(func):
     >>> curry(mod)(123)(10)
     3
     """
-    def first(arg1):
-        def second(arg2):
-            return func(arg1, arg2)
-        return second
-    return first
+
 
 
 def f1():
@@ -66,7 +56,7 @@ def f4():
     >>> f4()()(3)()
     3
     """
-    return lambda: lambda x: lambda: x
+
 
 
 def lambda_curry2(func):
@@ -84,7 +74,7 @@ def lambda_curry2(func):
     >>> lambda_curry2(mod)(123)(10)
     3
     """
-    return lambda arg1: lambda arg2: func(arg1, arg2)
+
 
 
 def match_k_alt(k):
