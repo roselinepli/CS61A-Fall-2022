@@ -90,3 +90,14 @@ def double_eights(n):
     >>> double_eights(80808080)
     False
     """
+    prev_eigth = False
+    while n > 0:
+        last_digit = n % 10
+        if last_digit == 8 and prev_eigth:
+            return True
+        elif last_digit == 8:
+            prev_eigth = True
+        else:
+            prev_eigth = False
+        n = n // 10
+    return False
