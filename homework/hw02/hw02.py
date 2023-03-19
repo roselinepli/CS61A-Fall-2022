@@ -32,7 +32,12 @@ def product(n, term):
     162
     """
     "*** YOUR CODE HERE ***"
-
+    res = 1
+    i = 1
+    while i <= n:
+        res *= term(i)
+        i += 1
+    return res
 
 
 def accumulate(merger, start, n, term):
@@ -59,7 +64,12 @@ def accumulate(merger, start, n, term):
     >>> accumulate(lambda x, y: (x + y) % 17, 19, 20, square)
     16
     """
-
+    i = 1
+    res = start
+    while i <= n:
+        res = merger(res, term(i))
+        i += 1
+    return res
 
 def summation_using_accumulate(n, term):
     """Returns the sum: term(1) + ... + term(n), using accumulate.
@@ -75,7 +85,7 @@ def summation_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(summation_using_accumulate)).body[0].body]
     ['Expr', 'Return']
     """
-
+    return accumulate(add, 0, n, term)
 
 
 def product_using_accumulate(n, term):
@@ -91,7 +101,7 @@ def product_using_accumulate(n, term):
     >>> import inspect, ast
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(product_using_accumulate)).body[0].body]
     ['Expr', 'Return']"""
-
+    return accumulate(mul, 1, n, term)
 
 
 
@@ -120,6 +130,19 @@ def funception(func1, start):
     >>> func2_6 = funception(func1, -1)
     >>> func2_6(4)    # Returns None since start < 0
     """
+    def func2(stop):
+        res = 1
+        if start < 0:
+            return None
+        elif start >= stop:
+            return func1(start)
+        else:
+            i = start
+            while i < stop:
+                res *= func1(i)
+                i += 1
+            return res
+    return func2
 
 
 def mul_by_num(num):
@@ -133,11 +156,11 @@ def mul_by_num(num):
     >>> y(-4)
     -8
     """
-
-
+    return lambda x: x * num
 
 def mod_maker():
-    """Return a two-argument function that performs the modulo operation and returns True if the numbers are divisble, and the remainder otherwise.
+    """Return a two-argument function that performs the modulo operation and returns
+    True if the numbers are divisble, and the remainder otherwise.
 
     >>> mod = mod_maker()
     >>> mod(7, 2) # 7 % 2
@@ -147,7 +170,7 @@ def mod_maker():
     >>> mod(8,4) # 8 % 4
     True
     """
-
+    return lambda i, j: i % j or True
 
 
 def add_results(f1, f2):
@@ -170,7 +193,7 @@ def add_results(f1, f2):
     >>> a3(4)
     44
     """
-
+    return lambda x: f1(x) + f2(x)
 
 
 def lambda_math_syntax_check():
