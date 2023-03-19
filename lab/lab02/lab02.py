@@ -14,7 +14,7 @@ def composer(f, g):
     >>> a2(5)
     108
     """
-
+    return lambda x: f(g(x))
 
 
 def composite_identity(f, g):
@@ -32,7 +32,9 @@ def composite_identity(f, g):
     False
     """
     # return lambda x: f(g(x)) == g(f(x))
-
+    def helper(x):
+        return composite_identity(f, g)(x) == composite_identity(g, f)(x)
+    return helper
 
 
 def count_cond(condition):
@@ -62,7 +64,15 @@ def count_cond(condition):
     >>> count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
     8
     """
-
+    def helper(n):
+        i = 1
+        count = 0
+        while i <= n:
+            if condition(n, i):
+                count += 1
+            i += 1
+        return count
+    return helper
 
 
 def multiple(a, b):
@@ -73,7 +83,11 @@ def multiple(a, b):
     >>> multiple(14, 21)
     42
     """
-
+    n = 1
+    while True:
+        if n % a == 0 and n % b == 0:
+            return n
+        n += 1
 
 
 def cycle(f1, f2, f3):
@@ -102,4 +116,18 @@ def cycle(f1, f2, f3):
     >>> do_two_cycles(1)
     19
     """
+    def func1(n):
+        def func2(x):
+            i = 0
+            while i < n:
+                if i % 3 == 0:
+                    x = f1(x)
+                elif i % 3 == 1:
+                    x = f2(x)
+                else:
+                    x = f3(x)
+                i += 1
+            return x
+        return func2
+    return func1
 
