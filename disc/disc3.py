@@ -25,9 +25,8 @@ def is_prime(n):
             return True
         elif n % i == 0:
             return False
-        return helper(i + 1)
+        return helper(i+1)
     return helper(2)
-
 
 def hailstone(n):
     """Print out the hailstone sequence starting at n, and return the number of elements in the sequence.
@@ -50,9 +49,10 @@ def hailstone(n):
     if n == 1:
         return 1
     elif n % 2 == 0:
-        return 1 + hailstone(n//2)
+        return 1 + hailstone(n //2)
     else:
         return 1 + hailstone(n*3 + 1)
+
 
 
 def merge(n1, n2):
@@ -68,7 +68,7 @@ def merge(n1, n2):
         return n2
     elif n2 == 0:
         return n1
-    elif n1 % 10 >= n2 % 10:
-        return merge(n1, n2//10) * 10 + n2 % 10
-    else:
+    elif n1 % 10 < n2 % 10:
         return merge(n1//10, n2) * 10 + n1 % 10
+    else:
+        return merge(n1, n2//10) * 10 + n2 % 10
