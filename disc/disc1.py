@@ -1,5 +1,12 @@
 def is_prime(n):
-
+    if n == 1:
+        return False
+    i = 2
+    while i < n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True
 
 def is_prime(n):
     def helper(i):
@@ -59,7 +66,13 @@ def unique_digits(n):
     >>> unique_digits(101) # 0 and 1
     2
     """
-
+    num = 0
+    while n > 0:
+        last = n % 10
+        n = n // 10
+        if not has_digit(n, last):
+            num += 1
+    return num
 
 
 def has_digit(n, k):
@@ -69,3 +82,9 @@ def has_digit(n, k):
     >>> has_digit(12, 7)
     False
     """
+    while n > 0:
+        last = n % 10
+        n = n // 10
+        if last == k:
+            return True
+    return False
