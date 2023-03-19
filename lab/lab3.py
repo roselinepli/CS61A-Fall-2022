@@ -14,12 +14,7 @@ def ordered_digits(x):
     >>> result
     False
     """
-    last = x % 10
-    x = x // 10
-    while x > 0 and last >= x % 10:
-        last = x % 10
-        x = x // 10
-    return x == 0
+
 
 def get_k_run_starter(n,k):
     """Returns the 0th digit of the kth increasing run within n.
@@ -39,14 +34,7 @@ def get_k_run_starter(n,k):
     >>> get_k_run_starter(1234234534564567, 2)
     2
     """
-    i = 0
-    while i <= k:
-        while n > 10 and (n % 10 > (n //10) % 10):
-            n //= 10
-        final = n % 10
-        i += 1
-        n //= 10
-    return final
+
 
 from operator import add, mul
 square = lambda x: x * x
@@ -69,26 +57,13 @@ def make_repeater(func, n):
     >>> make_repeater(square, 0)(5)
     5
     """
-    def inner_func(x):
-        k = 0
-        while k < n:
+    def f(x):
+        i = 0
+        while i < n:
             x = func(x)
-            k += 1
+            i += 1
         return x
-    return inner_func
-
-# def make_repeater(func, n):
-#     g = identity
-#     while n > 0:
-#         g = composer(func, g)
-#         n -= 1
-#     return g
-
-# def composer(func1, func2):
-#         """Return a function f, such that f(x) = func1(func2(x))."""
-#         def f(x):
-#             return func1(func2(x))
-#         return f
+    return f
 
 def apply_twice(func):
     return make_repeater(func, 2)

@@ -59,8 +59,6 @@ def accumulate(merger, start, n, term):
     >>> accumulate(lambda x, y: (x + y) % 17, 19, 20, square)
     16
     """
-    "*** YOUR CODE HERE ***"
-
 
 
 def summation_using_accumulate(n, term):

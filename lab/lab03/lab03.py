@@ -28,12 +28,7 @@ def ordered_digits(x):
     False
 
     """
-    last = x % 10
-    x = x // 10
-    while x > 0 and last >= x % 10:
-        last = x % 10
-        x = x // 10
-    return x == 0
+
 
 
 def get_k_run_starter(n, k):
@@ -55,15 +50,7 @@ def get_k_run_starter(n, k):
     >>> get_k_run_starter(1234234534564567, 2)
     2
     """
-    i = 0
-    final = None
-    while i <= k:
-        while n > 10 and (n % 10 > (n // 10) % 10):
-            n = n // 10
-        final = n % 10
-        i = i + 1
-        n = n // 10
-    return final
+
 
 
 def make_repeater(func, n):
@@ -81,18 +68,6 @@ def make_repeater(func, n):
     >>> make_repeater(square, 0)(5) # Yes, it makes sense to apply the function zero times!
     5
     """
-    g = identity
-    while n > 0:
-        g = composer(func, g)
-        n -= 1
-    return g
-
-
-def composer(func1, func2):
-    """Return a function f, such that f(x) = func1(func2(x))."""
-    def f(x):
-        return func1(func2(x))
-    return f
 
 
 def apply_twice(func):
@@ -103,7 +78,7 @@ def apply_twice(func):
     >>> apply_twice(square)(2)
     16
     """
-    return make_repeater(func, 2)
+
 
 
 def div_by_primes_under(n):
@@ -117,13 +92,7 @@ def div_by_primes_under(n):
     >>> div_by_primes_under(5)(1)
     False
     """
-    checker = lambda x: False
-    i = 2
-    while i <= n:
-        if not checker(i):
-            checker = (lambda f, i: lambda x: x % i == 0 or f(x))(checker, i)
-        i += 1
-    return checker
+
 
 
 def div_by_primes_under_no_lambda(n):
@@ -137,15 +106,4 @@ def div_by_primes_under_no_lambda(n):
     >>> div_by_primes_under_no_lambda(5)(1)
     False
     """
-    def checker(x):
-        return False
-    i = 2
-    while i <= n:
-        if not checker(i):
-            def outer(f, i):
-                def inner(x):
-                    return x % i == 0 or f(x)
-                return inner
-            checker = outer(checker, i)
-        i += 1
-    return checker
+
