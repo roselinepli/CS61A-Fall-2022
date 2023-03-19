@@ -32,15 +32,7 @@ def product(n, term):
     162
     """
     "*** YOUR CODE HERE ***"
-    # sum = 1
-    # for i in range(1, n+1):
-    #     sum *= term(i)
-    # return sum
-    total, k = 1, 1
-    while k <= n:
-        total *= term(k)
-        k += 1
-    return total
+
 
 
 def accumulate(merger, start, n, term):
@@ -68,18 +60,7 @@ def accumulate(merger, start, n, term):
     16
     """
     "*** YOUR CODE HERE ***"
-    total, k = start, 1
-    while k <= n:
-        total = merger(total, term(k))
-        k += 1
-    return total
 
-def accumulate_reverse(merger, start, n, term):
-    total, k = start, n
-    while k >= 1:
-        total = merger(total, term(k))
-        k -= 1
-    return total
 
 
 def summation_using_accumulate(n, term):
@@ -96,7 +77,7 @@ def summation_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(summation_using_accumulate)).body[0].body]
     ['Expr', 'Return']
     """
-    return accumulate(add, 0, n, term)
+
 
 
 def product_using_accumulate(n, term):
@@ -113,7 +94,7 @@ def product_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(product_using_accumulate)).body[0].body]
     ['Expr', 'Return']"""
 
-    return accumulate(mul, 1, n, term)
+
 
 
 def funception(func1, start):
@@ -141,18 +122,7 @@ def funception(func1, start):
     >>> func2_6 = funception(func1, -1)
     >>> func2_6(4)    # Returns None since start < 0
     """
-    def func2(stop):
-        i = start
-        total = 1
-        if start < 0:
-            return None
-        if start >= stop:
-            return func1(start)
-        while i < stop:
-            total *= func1(i)
-            i += 1
-        return total
-    return func2
+
 
 def mul_by_num(num):
     """Returns a function that takes one argument and returns num
@@ -165,7 +135,7 @@ def mul_by_num(num):
     >>> y(-4)
     -8
     """
-    return lambda x: x * num
+
 
 
 def mod_maker():
@@ -179,7 +149,7 @@ def mod_maker():
     >>> mod(8,4) # 8 % 4
     True
     """
-    return lambda x, y: x % y or True
+
 
 
 def add_results(f1, f2):
@@ -202,7 +172,7 @@ def add_results(f1, f2):
     >>> a3(4)
     44
     """
-    return lambda x: f1(x) + f2(x)
+
 
 
 def lambda_math_syntax_check():
