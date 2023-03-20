@@ -26,7 +26,6 @@ def num_eights(n):
     """
 
 
-
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
 
