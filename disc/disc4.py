@@ -5,9 +5,7 @@ def count_stair_ways(n):
     >>> count_stair_ways(4)
     5
     """
-    if n == 1 or n == 2:
-        return n
-    return count_stair_ways(n-1) + count_stair_ways(n-2)
+
 
 def count_k(n, k):
     """Counts the number of paths up a flight of n stairs when taking up to
@@ -22,16 +20,6 @@ def count_k(n, k):
     >>> count_k(300, 1)
     1
     """
-    if n == 0:
-        return 1
-    elif n < 0:
-        return 0
-    else:
-        total = 0
-        i = 1
-        while i <= k:
-            total += count_k(n-i, k)
-        return total
 
 
 def even_weighted_loop(s):
@@ -40,10 +28,7 @@ def even_weighted_loop(s):
     >>> even_weighted_loop(x)
     [0, 6, 20]
     """
-    # for i in range(len(s)):
-    #     if i % 2 == 0:
-    #         s[i] = s[i] * i
-    return [s[i] * i for i in range(len(s)) if i % 2 == 0]
+
 
 def max_product(s):
     """Return the maximum product that can be formed using
@@ -55,7 +40,5 @@ def max_product(s):
     >>> max_product([])
     1
     """
-    if not s:
-        return 1
-    return max(max_product(s[1:]), s[0] * max_product(s[2:]))
+
 

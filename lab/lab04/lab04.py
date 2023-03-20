@@ -19,7 +19,9 @@ def summation(n, term):
     True
     """
     assert n >= 1
-
+    if n == 1:
+        return term(n)
+    return term(n) + summation(n-1, term)
 
 
 def paths(m, n):
@@ -35,7 +37,9 @@ def paths(m, n):
     >>> paths(1, 157)
     1
     """
-
+    if m == 1 or n == 1:
+        return 1
+    return paths(m-1, n) + paths(m, n-1)
 
 
 def pascal(row, column):
@@ -50,9 +54,14 @@ def pascal(row, column):
     >>> pascal(4, 2)     # Row 4 (1 4 6 4 1), Column 2
     6
     """
-
-
-
+    if column == 0:
+        return 1
+    elif column > row:
+        return 0
+    else:
+        above = pascal(row-1, column)
+        above_left = pascal(row-1, column-1)
+        return above + above_left
 
 def double_eights(n):
     """ Returns whether or not n has two digits in row that
@@ -75,3 +84,11 @@ def double_eights(n):
     >>> check(HW_SOURCE_FILE, 'double_eights', ['While', 'For'])
     True
     """
+    last = n % 10
+    second_last = n // 10 % 10
+    if last == 8 and second_last == 8:
+        return True
+    elif n < 100:
+        return False
+    else:
+        return double_eights(n // 10)
