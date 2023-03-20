@@ -24,7 +24,12 @@ def num_eights(n):
     ...       ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'For', 'While'])
     True
     """
-
+    if n % 10 == 8:
+        return 1 + num_eights(n//10)
+    elif n < 10:
+        return 0
+    else:
+        return num_eights(n//10)
 
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
@@ -59,7 +64,14 @@ def pingpong(n):
     ...       ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr'])
     True
     """
-
+    def helper(res, i, step):
+        if i == n:
+            return res
+        elif i % 8 == 0 or num_eights(i) > 0:
+            return helper(res - step, i + 1, -step)
+        else:
+            return helper(res + step, i + 1, step)
+    return helper(1, 1, 1)
 
 
 def next_larger_coin(coin):
@@ -115,4 +127,14 @@ def count_coins(change):
     >>> check(HW_SOURCE_FILE, 'count_coins', ['While', 'For'])
     True
     """
-
+    def constrained_count(change, smallest_coin):
+        if change == 0:
+            return 1
+        if change < 0:
+            return 0
+        if smallest_coin == None:
+            return 0
+        without_coin = constrained_count(change, next_larger_coin(smallest_coin))
+        with_coin = constrained_count(change - smallest_coin, smallest_coin)
+        return without_coin + with_coin
+    return constrained_count(change, 1)
