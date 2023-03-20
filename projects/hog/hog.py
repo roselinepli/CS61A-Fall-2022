@@ -22,7 +22,8 @@ def roll_dice(num_rolls, dice=six_sided):
     assert type(num_rolls) == int, 'num_rolls must be an integer.'
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
-
+    vals = [dice() for _ in range(num_rolls)]
+    return 1 if 1 in vals else sum(vals)
     # END PROBLEM 1
 
 
@@ -33,7 +34,7 @@ def tail_points(opponent_score):
 
     """
     # BEGIN PROBLEM 2
-
+    return 2 * abs(opponent_score%10 - opponent_score//10%10) + 1
     # END PROBLEM 2
 
 
@@ -50,7 +51,10 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert num_rolls >= 0, 'Cannot roll a negative number of dice in take_turn.'
     assert num_rolls <= 10, 'Cannot roll more than 10 dice.'
     # BEGIN PROBLEM 3
-
+    if num_rolls == 0:
+        return tail_points(opponent_score)
+    else:
+        return roll_dice(num_rolls, dice)
     # END PROBLEM 3
 
 
@@ -73,6 +77,20 @@ def square_update(num_rolls, player_score, opponent_score, dice=six_sided):
 
 
 # BEGIN PROBLEM 4
+def perfect_square(score):
+    d = 1
+    while d <= score:
+        if d * d == score:
+            return True
+        d += 1
+    return False
+
+def next_perfect_square(score):
+    d = 1
+    while d <= score:
+        if d * d == score:
+            return (d+1) * (d+1)
+        d += 1
 
 # END PROBLEM 4
 
@@ -112,7 +130,14 @@ def play(strategy0, strategy1, update,
     """
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-
+    while score0 < goal and score1 < goal:
+        if who == 0:
+            num_rolls0 = strategy0(score0, score1)
+            score0 = update(num_rolls0, score0, score1, dice)
+        else:
+            num_rolls1 = strategy1(score1, score0)
+            score1 = update(num_rolls1, score1, score0, dice)
+        who = 1 - who
     # END PROBLEM 5
     return score0, score1
 
@@ -137,7 +162,9 @@ def always_roll(n):
     """
     assert n >= 0 and n <= 10
     # BEGIN PROBLEM 6
-
+    def always_roll_n(score, opponet_score):
+        return n
+    return always_roll_n
     # END PROBLEM 6
 
 
@@ -167,7 +194,13 @@ def is_always_roll(strategy, goal=GOAL):
     False
     """
     # BEGIN PROBLEM 7
-
+    dice_num = strategy(0, 0)
+    for score in range(goal):
+        for oppo_score in range(goal):
+            curr_num = strategy(score, oppo_score)
+            if curr_num != dice_num:
+                return False
+    return True
     # END PROBLEM 7
 
 
@@ -183,7 +216,13 @@ def make_averaged(original_function, total_samples=1000):
     3.0
     """
     # BEGIN PROBLEM 8
-
+    def averaged_dice(*args):
+        sum = 0.0
+        for i in range(total_samples):
+            cur = original_function(*args)
+            sum += cur
+        return sum / total_samples
+    return averaged_dice
     # END PROBLEM 8
 
 
@@ -198,7 +237,16 @@ def max_scoring_num_rolls(dice=six_sided, total_samples=1000):
     1
     """
     # BEGIN PROBLEM 9
-
+    max_num = 1
+    cur_num = 1
+    max_average = make_averaged(roll_dice, total_samples)(1, dice)
+    while cur_num < 10:
+        cur_num += 1
+        cur_average = make_averaged(roll_dice, total_samples)(cur_num, dice)
+        if cur_average > max_average:
+            max_num = cur_num
+            max_average = cur_average
+    return max_num
     # END PROBLEM 9
 
 
@@ -242,14 +290,25 @@ def tail_strategy(score, opponent_score, threshold=12, num_rolls=6):
     points, and returns NUM_ROLLS otherwise. Ignore score and Square Swine.
     """
     # BEGIN PROBLEM 10
-
+    pig_tail = tail_points(opponent_score)
+    if pig_tail >= threshold:
+        return 0
+    else:
+        return num_rolls
     # END PROBLEM 10
 
 
 def square_strategy(score, opponent_score, threshold=12, num_rolls=6):
     """This strategy returns 0 dice when your score would increase by at least threshold."""
     # BEGIN PROBLEM 11
-
+    pig_tail = tail_points(opponent_score)
+    if pig_tail >= threshold:
+        return 0
+    else:
+        if perfect_square(score + pig_tail):
+            return 0
+        else:
+            return num_rolls
     # END PROBLEM 11
 
 
@@ -259,7 +318,7 @@ def final_strategy(score, opponent_score):
     *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 12
-
+    return 0
     # END PROBLEM 12
 
 
