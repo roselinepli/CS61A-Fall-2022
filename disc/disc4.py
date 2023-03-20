@@ -31,8 +31,19 @@ def count_k(n, k):
         i = 1
         while i <= k:
             total += count_k(n-i, k)
-            i += 1
         return total
+
+
+def even_weighted_loop(s):
+    """
+    >>> x = [1, 2, 3, 4, 5, 6]
+    >>> even_weighted_loop(x)
+    [0, 6, 20]
+    """
+    # for i in range(len(s)):
+    #     if i % 2 == 0:
+    #         s[i] = s[i] * i
+    return [s[i] * i for i in range(len(s)) if i % 2 == 0]
 
 def max_product(s):
     """Return the maximum product that can be formed using
@@ -44,7 +55,7 @@ def max_product(s):
     >>> max_product([])
     1
     """
-    if s == []:
+    if not s:
         return 1
     return max(max_product(s[1:]), s[0] * max_product(s[2:]))
 
