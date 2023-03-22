@@ -95,6 +95,12 @@ class Cat(Pet):
         else:
             print("This cat still has lives to lose.")
 
+    def __repr__(self):
+        return f'{self.name}, {self.lives} lives'
+
+    def __str__(self):
+        return f'{self.name}'
+
 class NoisyCat(Cat):
     def __init__(self, name, owner, lives=9):
         super().__init__(name, owner, lives)
@@ -102,3 +108,41 @@ class NoisyCat(Cat):
     def talk(self):
         for _ in range(2):
             super().talk()
+
+class Rational:
+
+    def __init__(self, numerator, denominator):
+        self.numerator = numerator
+        self.denominator = denominator
+
+    def __str__(self):
+        return f'{self.numerator}/{self.denominator}'
+
+    def __repr__(self):
+        return f'Rational({self.numerator}, {self.denominator})'
+
+
+class A:
+    def __init__(self, x):
+        self.x = x
+
+    def __repr__(self):
+        return self.x
+
+    def __str__(self):
+        return self.x * 2
+
+class B:
+    def __init__(self):
+        print('boo!')
+        self.a = []
+
+    def add_a(self, a):
+        self.a.append(a)
+
+    def __repr__(self):
+        print(len(self.a))
+        ret = ''
+        for a in self.a:
+            ret += str(a)
+        return ret
