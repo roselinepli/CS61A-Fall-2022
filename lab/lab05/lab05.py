@@ -24,7 +24,20 @@ def flatten(s):
     >>> x
     [[1, [1, [1, [1, 1, [1, 1, [1]]]], 1]]]
     """
-    "*** YOUR CODE HERE ***"
+    # lst = []
+    # for elem in s:
+    #     if type(elem) == list:
+    #         lst += flatten(elem)
+    #     else:
+    #         lst += [elem]
+    # return lst
+
+    if not s:
+        return []
+    elif type(s[0]) == list:
+        return flatten(s[0]) + flatten(s[1:])
+    else:
+        return [s[0]] + flatten(s[1:])
 
 
 def my_map(fn, seq):
