@@ -52,7 +52,7 @@ def my_map(fn, seq):
     2023
     [None, None, None]
     """
-    return ______
+    return [fn(elem) for elem in seq]
 
 
 def my_filter(pred, seq):
@@ -71,7 +71,7 @@ def my_filter(pred, seq):
     >>> my_filter(lambda x: max(5, x) == 5, [1, 2, 3, 4, 5, 6, 7])
     [1, 2, 3, 4, 5]
     """
-    return ______
+    return [elem for elem in seq if pred(elem)]
 
 
 def my_reduce(combiner, seq):
@@ -86,7 +86,16 @@ def my_reduce(combiner, seq):
     >>> my_reduce(lambda x, y: x + 2 * y, [1, 2, 3]) # (1 + 2 * 2) + 2 * 3
     11
     """
-    "*** YOUR CODE HERE ***"
+    # total = seq[0]
+    # for elem in seq[1:]:
+    #     total = combiner(total, elem)
+    # return total
+
+    def helper(curr, seq):
+        if len(seq) == 0:
+            return curr
+        return helper(combiner(curr, seq[0]), seq[1:])
+    return helper(seq[0], seq[1:])
 
 
 def my_map_syntax_check():
