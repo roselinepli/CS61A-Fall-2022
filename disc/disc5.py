@@ -54,7 +54,6 @@ def sum_tree(t):
     """
 
 
-
 def balanced(t):
     """
     Checks if each branch has same sum of all elements and if
