@@ -134,7 +134,7 @@ def distance(city_a, city_b):
     >>> distance(city_c, city_d)
     5.0
     """
-    "*** YOUR CODE HERE ***"
+    return sqrt((get_lat(city_a) - get_lat(city_b))**2 + (get_lon(city_a) - get_lon(city_b))**2)
 
 
 def closer_city(lat, lon, city_a, city_b):
@@ -152,7 +152,13 @@ def closer_city(lat, lon, city_a, city_b):
     >>> closer_city(41.29, 174.78, bucharest, vienna)
     'Bucharest'
     """
-    "*** YOUR CODE HERE ***"
+    city_c = make_city('c', lat, lon)
+    dis_a = distance(city_c, city_a)
+    dis_b = distance(city_c, city_b)
+    if dis_a >= dis_b:
+        return get_name(city_b)
+    else:
+        return get_name(city_a)
 
 
 def check_city_abstraction():
@@ -243,7 +249,7 @@ def count_palindromes(L):
     >>> count_palindromes(("Acme", "Madam", "Pivot", "Pip"))
     2
     """
-    return ______
+    return len(list(filter(lambda s: s.lower() == s[::-1].lower(), L)))
 
 
 def coords(fn, seq, lower, upper):
@@ -253,8 +259,7 @@ def coords(fn, seq, lower, upper):
     >>> coords(fn, seq, 1, 9)
     [[-2, 4], [1, 1], [3, 9]]
     """
-    "*** YOUR CODE HERE ***"
-    return ______
+    return [[x, fn(x)] for x in seq if lower <= fn(x) <= upper]
 
 
 def change_abstraction(change):
