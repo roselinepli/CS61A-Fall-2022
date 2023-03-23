@@ -1,18 +1,18 @@
 def tree(label, branches=[]):
     """Construct a tree with the given label value and a list of branches."""
-    return [label] + list(branches)
+    return
 
 def label(tree):
     """Return the label value of a tree."""
-    return tree[0]
+    return
 
 def branches(tree):
     """Return the list of branches of the given tree."""
-    return tree[1:]
+    return
 
 def is_leaf(tree):
     """Return True if the given tree's list of branches is empty, and False otherwise."""
-    return not branches(tree)
+    return
 
 def height(t):
     """Return the height of a tree.
@@ -24,16 +24,7 @@ def height(t):
     >>> height(t)
     3
     """
-    # if is_leaf(t):
-    #     return 0
-    # best_height = 0
-    # for b in branches(t):
-    #     best_height = max(height(b), best_height)
-    # return best_height + 1
 
-    if is_leaf(t):
-        return 0
-    return 1 + max([height(b) for b in branches(t)])
 
 def max_path_sum(t):
     """Return the maximum path sum of the tree.
@@ -42,16 +33,7 @@ def max_path_sum(t):
     >>> max_path_sum(t)
     11
     """
-    # if is_leaf(t):
-    #     return label(t)
-    # max_sum = 0
-    # for b in branches(t):
-    #     max_sum = max(max_path_sum(b), max_sum)
-    # return label(t) + max_sum
 
-    if is_leaf(t):
-        return label(t)
-    return label(t) + max([max_path_sum(b) for b in branches(t)])
 
 
 def find_path(t, x):
@@ -61,12 +43,7 @@ def find_path(t, x):
     [2, 7, 6, 5]
     >>> find_path(t, 10) # returns None
     """
-    if label(t) == x:
-        return [label(t)]
-    for b in branches(t):
-        path = [find_path(b, x)]
-        if path:
-            return [label(t)] + path
+
 
 def sum_tree(t):
     """
@@ -75,10 +52,7 @@ def sum_tree(t):
     >>> sum_tree(t)
     15
     """
-    total = 0
-    for b in branches(t):
-        total += sum_tree(b)
-    return label(t) + total
+
 
 
 def balanced(t):
@@ -95,10 +69,7 @@ def balanced(t):
     >>> balanced(t)
     False
     """
-    for b in branches(t):
-        if sum_tree(branches(t)[0]) != sum_tree(b) or not balanced(b):
-            return False
-    return True
+
 
 
 def sprout_leaves(t, leaves):
@@ -106,9 +77,7 @@ def sprout_leaves(t, leaves):
     Sprout new leaves containing the data in leaves at each leaf in the original
     tree t and return the resulting tree.
     """
-    if is_leaf(t):
-        return tree(label(t), [tree(leaf) for leaf in leaves])
-    return tree(label(t), [sprout_leaves(b, leaves) for b in branches(t)])
+
 
 
 def hailstone_tree(n, h):
