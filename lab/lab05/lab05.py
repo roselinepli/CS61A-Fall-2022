@@ -24,6 +24,13 @@ def flatten(s):
     >>> x
     [[1, [1, [1, [1, 1, [1, 1, [1]]]], 1]]]
     """
+    lst = []
+    for elem in s:
+        if type(elem) == list:
+            lst += flatten(elem)
+        else:
+            lst += [elem]
+    return lst
 
 
 
@@ -39,6 +46,7 @@ def my_map(fn, seq):
     2023
     [None, None, None]
     """
+    return [fn(x) for x in seq]
 
 
 
@@ -58,6 +66,7 @@ def my_filter(pred, seq):
     >>> my_filter(lambda x: max(5, x) == 5, [1, 2, 3, 4, 5, 6, 7])
     [1, 2, 3, 4, 5]
     """
+    return [x for x in seq if pred(x)]
 
 
 
@@ -73,7 +82,10 @@ def my_reduce(combiner, seq):
     >>> my_reduce(lambda x, y: x + 2 * y, [1, 2, 3]) # (1 + 2 * 2) + 2 * 3
     11
     """
-
+    total = seq[0]
+    for elem in seq[1:]:
+        total = combiner(total, elem)
+    return total
 
 
 def my_map_syntax_check():
@@ -112,6 +124,7 @@ def distance(city_a, city_b):
     >>> distance(city_c, city_d)
     5.0
     """
+    return sqrt((get_lat(city_a) - get_lat(city_b)) ** 2 + (get_lon(city_a) - get_lon(city_b)) ** 2)
 
 
 
@@ -130,6 +143,13 @@ def closer_city(lat, lon, city_a, city_b):
     >>> closer_city(41.29, 174.78, bucharest, vienna)
     'Bucharest'
     """
+    city_c = make_city("c", lat, lon)
+    dis_a = distance(city_c, city_a)
+    dis_b = distance(city_c, city_b)
+    if dis_a >= dis_b:
+        return get_name(city_b)
+    else:
+        return get_name(city_a)
 
 
 
@@ -221,6 +241,7 @@ def count_palindromes(L):
     >>> count_palindromes(("Acme", "Madam", "Pivot", "Pip"))
     2
     """
+    return len([x for x in L if x.lower() == x[::-1].lower()])
 
 
 
@@ -231,6 +252,7 @@ def coords(fn, seq, lower, upper):
     >>> coords(fn, seq, 1, 9)
     [[-2, 4], [1, 1], [3, 9]]
     """
+    return [[x, fn(x)] for x in seq if lower <= fn(x) <= upper]
 
 
 
