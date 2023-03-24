@@ -64,13 +64,13 @@ def end(s):
 def planet(mass):
     """Construct a planet of some mass."""
     assert mass > 0
-    "*** YOUR CODE HERE ***"
+    return ['planet', mass]
 
 
 def mass(w):
     """Select the mass of a planet."""
     assert is_planet(w), 'must call mass on a planet'
-    "*** YOUR CODE HERE ***"
+    return w[1]
 
 
 def is_planet(w):
@@ -126,7 +126,13 @@ def balanced(m):
     >>> check(HW_SOURCE_FILE, 'balanced', ['Index'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if is_planet(m):
+        return True
+    else:
+        left_end, right_end = end(left(m)), end(right(m))
+        torque_left = length(left(m)) * total_weight(left_end)
+        torque_right = length(right(m)) * total_weight(right_end)
+        return torque_left == torque_right and balanced(left_end) and balanced(right_end)
 
 
 def totals_tree(m):
@@ -158,7 +164,11 @@ def totals_tree(m):
     >>> check(HW_SOURCE_FILE, 'totals_tree', ['Index'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if is_planet(m):
+        return tree(mass(m))
+    else:
+        branches = [totals_tree(end(f(m))) for f in [left, right]]
+        return tree(sum([label(b) for b in branches]), branches)
 
 
 def replace_loki_at_leaf(t, lokis_replacement):
