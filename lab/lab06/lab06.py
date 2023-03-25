@@ -29,7 +29,7 @@ def insert_items(lst, entry, elem):
     ...       ['List', 'ListComp', 'Slice'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    e*** YOUR CODE HERE ***"
 
 
 def count_occurrences(t, n, x):
