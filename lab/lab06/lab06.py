@@ -29,7 +29,14 @@ def insert_items(lst, entry, elem):
     ...       ['List', 'ListComp', 'Slice'])
     True
     """
-
+    i = 0
+    while i < len(lst):
+        if lst[i] == entry:
+            lst.insert(i+1, elem)
+            i += 2
+        else:
+            i += 1
+    return lst
 
 
 def count_occurrences(t, n, x):
@@ -52,7 +59,11 @@ def count_occurrences(t, n, x):
     >>> count_occurrences(s2, 6, 6)
     2
     """
-    "*** YOUR CODE HERE ***"
+    cnt = 0
+    for _ in range(n):
+        if next(t) == x:
+            cnt += 1
+    return cnt
 
 
 def repeated(t, k):
