@@ -129,18 +129,6 @@ def index_largest(seq):
     2
     """
     assert len(seq) > 0
-    # largest_so_far = seq[0]
-    # i = 1
-    # while i < len(seq):
-    #     if seq[i] < largest_so_far:
-    #         i += 1
-    #     else:
-    #         largest_so_far = seq[i]
-    #         i += 1
-    # return seq.index(largest_so_far)
-
-    return seq.index(max(seq))
-
     largest_index, largest_value = 0, seq[0]
     for i in range(1, len(seq)):
         if seq[i] > largest_value:
