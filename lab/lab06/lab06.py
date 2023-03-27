@@ -88,7 +88,17 @@ def repeated(t, k):
     2
     """
     assert k > 1
-    "*** YOUR CODE HERE ***"
+    i = 1
+    last_value = None
+    while True:
+        current_value = next(t)
+        if current_value == last_value:
+            i += 1
+        else:
+            last_value = current_value
+            i = 1
+        if i == k:
+            return current_value
 
 
 def partial_reverse(lst, start):
@@ -103,7 +113,11 @@ def partial_reverse(lst, start):
     >>> a
     [1, 2, 7, 6, 5, 3, 4]
     """
-    "*** YOUR CODE HERE ***"
+    end = len(lst) - 1
+    while start < end:
+        lst[start], lst[end] = lst[end], lst[start]
+        start += 1
+        end -= 1
 
 
 def index_largest(seq):
@@ -115,7 +129,23 @@ def index_largest(seq):
     2
     """
     assert len(seq) > 0
-    "*** YOUR CODE HERE ***"
+    # largest_so_far = seq[0]
+    # i = 1
+    # while i < len(seq):
+    #     if seq[i] < largest_so_far:
+    #         i += 1
+    #     else:
+    #         largest_so_far = seq[i]
+    #         i += 1
+    # return seq.index(largest_so_far)
+
+    return seq.index(max(seq))
+
+    largest_index, largest_value = 0, seq[0]
+    for i in range(1, len(seq)):
+        if seq[i] > largest_value:
+            largest_index, largest_value = i, seq[i]
+    return largest_index
 
 
 def pizza_sort(lst):
@@ -127,11 +157,11 @@ def pizza_sort(lst):
     >>> a
     [9, 8, 7, 5, 3, 2, 1]
     """
-    pizza_sort_helper(________, ________)
+    pizza_sort_helper(lst, 0)
 
 
 def pizza_sort_helper(lst, start):
-    if _______________:
-        partial_reverse(________, ________)
-        partial_reverse(________, ________)
-        _______________(________, ________)
+    if start < len(lst) - 1:
+        partial_reverse(lst, start + index_largest(lst[start:]))
+        partial_reverse(lst, start)
+        pizza_sort_helper(lst, start + 1)
