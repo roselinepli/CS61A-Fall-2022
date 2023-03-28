@@ -29,7 +29,14 @@ def insert_items(lst, entry, elem):
     ...       ['List', 'ListComp', 'Slice'])
     True
     """
-
+    i = 0
+    while i < len(lst):
+        if lst[i] == entry:
+            lst.insert(i+1, elem)
+            i += 2
+        else:
+            i += 1
+    return lst
 
 
 def count_occurrences(t, n, x):
@@ -52,6 +59,11 @@ def count_occurrences(t, n, x):
     >>> count_occurrences(s2, 6, 6)
     2
     """
+    cnt = 0
+    for _ in range(n):
+        if next(t) == x:
+            cnt += 1
+    return cnt
 
 
 
@@ -77,6 +89,17 @@ def repeated(t, k):
     2
     """
     assert k > 1
+    i = 1
+    last_val = None
+    while True:
+        current_val = next(t)
+        if current_val == last_val:
+            i += 1
+        else:
+            last_val = current_val
+            i = 1
+        if i == k:
+            return current_val
 
 
 
@@ -92,7 +115,12 @@ def partial_reverse(lst, start):
     >>> a
     [1, 2, 7, 6, 5, 3, 4]
     """
-
+    i = start
+    j = len(lst) - 1
+    while i < j:
+        lst[i], lst[j] = lst[j], lst[i]
+        i += 1
+        j -= 1
 
 
 def index_largest(seq):
@@ -104,7 +132,7 @@ def index_largest(seq):
     2
     """
     assert len(seq) > 0
-
+    return seq.index(max(seq))
 
 
 def pizza_sort(lst):
