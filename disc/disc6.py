@@ -13,8 +13,9 @@ def add_this_many(x, el, s):
     for num in s:
         if num == x:
             cnt += 1
-    for i in range(cnt):
+    for _ in range(cnt):
         s.append(el)
+
 
 def countdown(n):
     print("Beginning countdowm!")
@@ -22,6 +23,7 @@ def countdown(n):
         yield n
         n -= 1
     print("Blastoff!")
+
 
 def filter_iter(iterable, f):
     """
@@ -42,6 +44,7 @@ def filter_iter(iterable, f):
         if f(elem):
             yield elem
 
+
 def is_prime(n):
     """Returns True if n is a prime number and False otherwise.
     >>> is_prime(2)
@@ -56,8 +59,9 @@ def is_prime(n):
             return True
         elif n % i == 0:
             return False
-        return helper(i+1)
+        return helper(i + 1)
     return helper(2)
+
 
 def primes_gen(n):
     """Generates primes in decreasing order.
@@ -65,9 +69,15 @@ def primes_gen(n):
     >>> list(pg)
     [7, 5, 3, 2]
     """
-    for num in range(n, 1, -1):
-        if is_prime(num):
-            yield num
+    # for elem in range(n, 1, -1):
+    #     if is_prime(elem):
+    #         yield elem
+
+    if n == 1:
+        return
+    if is_prime(n):
+        yield n
+    yield from primes_gen(n-1)
 
 
 def preorder(t):
@@ -83,3 +93,8 @@ def preorder(t):
     for child in branches(t):
         flattened_branches += preorder(child)
     return [label(t)] + flattened_branches
+
+def preorder(t):
+    yield label(t)
+    for b in branches(t):
+        yield from generate_preorder(b)
