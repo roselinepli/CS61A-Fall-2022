@@ -9,12 +9,9 @@ def add_this_many(x, el, s):
     >>> s
     [1, 2, 4, 2, 1, 5, 5, 2, 2]
     """
-    cnt = 0
-    for num in s:
+    for num in list(s):
         if num == x:
-            cnt += 1
-    for _ in range(cnt):
-        s.append(el)
+            s.append(el)
 
 
 def countdown(n):
@@ -40,6 +37,8 @@ def filter_iter(iterable, f):
     >>> next(s)
     4
     """
+    #yield from [elem for elem in iterable if f(elem)]
+
     for elem in iterable:
         if f(elem):
             yield elem
@@ -69,15 +68,9 @@ def primes_gen(n):
     >>> list(pg)
     [7, 5, 3, 2]
     """
-    # for elem in range(n, 1, -1):
-    #     if is_prime(elem):
-    #         yield elem
-
-    if n == 1:
-        return
-    if is_prime(n):
-        yield n
-    yield from primes_gen(n-1)
+    for num in range(n, 1, -1):
+        if is_prime(num):
+            yield num
 
 
 def preorder(t):
@@ -89,12 +82,6 @@ def preorder(t):
     >>> preorder(tree(2, [tree(4, [tree(6)])]))
     [2, 4, 6]
     """
-    flattened_branches = []
-    for child in branches(t):
-        flattened_branches += preorder(child)
-    return [label(t)] + flattened_branches
-
-def preorder(t):
-    yield label(t)
+    yield [label(t)]
     for b in branches(t):
-        yield from generate_preorder(b)
+        yield from preorder(b)
