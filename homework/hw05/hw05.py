@@ -8,14 +8,7 @@ def hailstone(n):
     >>> next(hail_gen)
     1
     """
-    yield n
-    if n == 1:
-        while True:
-            yield 1
-    elif n % 2 == 0:
-        yield from hailstone(n // 2)
-    else:
-        yield from hailstone(n*3 + 1)
+
 
 
 def merge(a, b):
@@ -30,19 +23,7 @@ def merge(a, b):
     >>> [next(result) for _ in range(10)]
     [2, 3, 5, 7, 8, 9, 11, 13, 14, 15]
     """
-    a_val = next(a)
-    b_val = next(b)
-    while True:
-        if a_val < b_val:
-            yield a_val
-            a_val = next(a)
-        elif a_val > b_val:
-            yield b_val
-            b_val = next(b)
-        else:
-            yield a_val
-            a_val = next(a)
-            b_val = next(b)
+
 
 
 def perms(seq):
@@ -67,14 +48,7 @@ def perms(seq):
     >>> sorted(perms("ab"))
     [['a', 'b'], ['b', 'a']]
     """
-    if len(seq) == 0:
-        yield []
-    elif len(seq) == 1:
-        yield [seq[0]]
-    else:
-        for i in range(len(seq)):
-            for p in perms(seq[:i] + seq[i+1:]):
-                yield [seq[i]] + p
+
 
 
 def yield_paths(t, value):
@@ -111,11 +85,7 @@ def yield_paths(t, value):
     >>> sorted(list(path_to_2))
     [[0, 2], [0, 2, 1, 2]]
     """
-    if label(t) == value:
-        yield [value]
-    for b in branches(t):
-        for path in yield_paths(b, value):
-            yield [label(t)] + path
+
 
 
 def remainders_generator(m):
@@ -149,12 +119,7 @@ def remainders_generator(m):
     7
     11
     """
-    def gen(i):
-        for e in naturals():
-            if e % m == i:
-                yield e
-    for i in range(m):
-        yield gen(i)
+
 
 
 # Tree ADT
