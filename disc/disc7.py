@@ -43,7 +43,6 @@ class Email:
         self.sender_name = sender_name
         self.recipient_name = recipient_name
 
-
 class Server:
     """Each Server has an instance attribute clients, which is a dictionary
     that associates client names with client objects."""
@@ -52,8 +51,7 @@ class Server:
 
     def send(self, email):
         """Take an email and put it in the inbox of the client it is addressed to."""
-        client_name = email.recipient_name
-        client = self.clients[client_name]
+        client = self.clients[email.recipient_name]
         client.receive(email)
 
     def register_client(self, client: 'Client', client_name: str):
@@ -83,13 +81,13 @@ class Client:
         self.inbox = []
         self.server = server
         self.name = name
-
-        server.register_client(self, name)
+        self.server.register_client(self, self.name)
 
     def compose(self, msg, recipient_name):
         """Send an email with the given message msg to the given recipient client."""
         email = Email(msg, self.name, recipient_name)
         self.server.send(email)
+
 
     def receive(self, email):
         """Take an email and add it to the inbox of this client."""
