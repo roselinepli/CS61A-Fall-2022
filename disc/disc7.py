@@ -157,3 +157,73 @@ class Keyboard:
         for pos in typing_input:
             accumulate += self.press(pos)
         return accumulate
+
+
+class TeamMember:
+    def __init__(self, operation, prev_member=None):
+        """
+        A TeamMember object is instantiated by taking in an 'operation'
+        and a TeamMember object 'prev_memver', which is the team member
+        who "sits in front of" this current team member. A TeamMember also
+        tracks a 'history' list, which contains the answers given by each
+        individual team member.
+        """
+        self.history = []
+        self.operation = operation
+        self.prev_member = prev_member
+
+    def relay_calculate(self, x):
+        """
+        The relay_calculate method takes in a number 'x' and perfroms a replay
+        by passing in 'x' to the first team member's 'operation'. Then, that
+        answer is passed to the next member's operation, etc. until we get
+        to the current TeamMember, in which case we return the final 'result'.
+        """
+        if not self.prev_member:
+            result = self.operation(x)
+            self.history = [result]
+        else:
+            prev_result = self.prev_member.relay_calculate(x)
+            result = self.operation(prev_result)
+            self.history = self.prev_member.history + [result]
+        return result
+
+    def relay_history(self):
+        """
+        Returns a list of the answers given by each team member in the most
+        recent relay the current TeamMember has participated in.
+        """
+        return self.history
+
+
+class Cat:
+    def __init__(self, name, owner, lives=9):
+        self.is_alive = True
+        self.name = name
+        self.owner = owner
+        self.lives = lives
+
+    def talk(self):
+        return self.name + ' says meow!'
+
+    @classmethod
+    def cat_creator(cls, owner):
+        """
+        Returns a new instance of a Cat.
+        This instance's name is "[owner]'s Cat", with [owner] being
+        the name of its owner.
+        >>> cat1 = Cat.cat_creator("Bryce")
+        >>> isinstance(cat1, Cat)
+        True
+        >>> cat1.owner
+        'Bryce'
+        >>> cat1.name
+        "Bryce's cat"
+        >>> cat2 = Cat.cat_creator("Tyler")
+        >>> cat2.owner
+        'Tyler'
+        >>> cat2.name
+        "Tyler's Cat
+        """
+        name = owner + "'s cat"
+        return cls(name, owner)
