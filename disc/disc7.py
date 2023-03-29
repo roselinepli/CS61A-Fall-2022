@@ -108,3 +108,52 @@ if __name__ == '__main__':
     client_tests()
 
 
+class Button:
+
+    def __init__(self, pos, key):
+        self.pos = pos
+        self.key = key
+        self.times_pressed = 0
+
+class Keyboard:
+    """A Keyboard stores an arbitrary number of Buttons in a dictionary.
+    Each dictionary key is a Button's position, and each dictionary vallue
+    is the corresponding Button.
+    >>> b1, b2 = Button(5, "H"), Button(7, "I)
+    >>> k = Keyborad(b1, b2)
+    >>> k.buttons[5].key
+    'H'
+    >>> k.press(7)
+    'I'
+    >>> k.press(0)
+    ''
+    >>> k.typing([5, 7])
+    'HI'
+    >>> k.typing([7, 5])
+    'IH'
+    >>> b1.times_pressed
+    2
+    >>> b2.times_pressed
+    3
+    """
+    def __init__(self, *args):
+        self.buttons = {}
+        for button in args:
+            self.buttons[button.pos] = button
+
+    def press(self, pos):
+        """Takes in a position of the buttton pressed, and
+        returns that button's output."""
+        if pos in self.buttons.keys():
+            b = self.buttons[pos]
+            b.times_pressed += 1
+            return b.key
+        return ''
+
+    def typing(self, typing_input):
+        """Takes in a list of positions of buttons pressed, and
+        returns the total output."""
+        accumulate = ''
+        for pos in typing_input:
+            accumulate += self.press(pos)
+        return accumulate
