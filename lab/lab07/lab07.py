@@ -36,7 +36,7 @@ class Person:
         self.previous = 'I squirreled it away before it could catch on fire.'
 
     def say(self, stuff):
-        pass
+        self.previous = stuff
         return stuff
 
     def ask(self, stuff):
@@ -46,7 +46,7 @@ class Person:
         return self.say("Hello, my name is " + self.name)
 
     def repeat(self):
-        pass
+        return self.say(self.previous)
 
 
 class SmartFridge:
@@ -72,11 +72,18 @@ class SmartFridge:
         self.items = {}
 
     def add_item(self, item, quantity):
-        pass
+        if item in self.items:
+            self.items[item] += quantity
+        else:
+            self.items[item] = quantity
+        return f'I now have {self.items[item]} {item}'
 
     def use_item(self, item, quantity):
-        pass
-
+        self.items[item] -= min(quantity, self.items[item])
+        if self.items[item] == 0:
+            return f'Oh no, we need more {item}!'
+        else:
+            return f'I have {self.items[item]} {item} left'
 
 class CucumberGame:
     """Play a round and return all winners so far. Cards is a list of pairs.
