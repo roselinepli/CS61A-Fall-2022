@@ -43,11 +43,10 @@ class Coin:
     cents = None  # will be provided by subclasses, but not by Coin itself
 
     def __init__(self, year):
-
+        self.year = year
 
     def worth(self):
-
-
+        self.worth = self.cents + max(0, Mint.present_year - self.year - 50)
 
 class Nickel(Coin):
     cents = 5
@@ -186,10 +185,16 @@ class Player:
         self.popularity = 100
 
     def debate(self, other):
-
+        proba = max(0.1, self.popularity/(self.popularity + other.popularity))
+        if random() < proba:
+            self.popularity += 50
+        else:
+            self.popularity = max(0, self.popularity - 50)
 
     def speech(self, other):
-
+        self.votes += self.popularity // 10
+        self.popularity += self.popularity // 10
+        other.popularity -= other.popularity // 10
 
     def choose(self, other):
         return self.speech
@@ -212,13 +217,24 @@ class Game:
         self.turn = 0
 
     def play(self):
-
+        while not self.game_over:
+            if self.turn % 2 == 0:
+                curr, other = self.p1, self.p2
+            else:
+                curr, other = self.p2, self.p1
+            curr.choose(other)(other)
+            self.turn += 1
 
     def game_over(self):
         return max(self.p1.votes, self.p2.votes) >= 50 or self.turn >= 10
 
     def winner(self):
-
+        if self.p1.votes > self.p2.votes:
+            return self.p1.votes
+        elif self.p1.votes < self.p2.votes:
+            return self.p2.votes
+        else:
+            return None
 
 
 # Phase 3: New Players
@@ -233,6 +249,10 @@ class AggressivePlayer(Player):
 
     """
     def choose(self, other):
+        if self.popularity <= other.popularity:
+            return self.debate
+        else:
+            return self.speech
 
 
 class CautiousPlayer(Player):
@@ -248,6 +268,10 @@ class CautiousPlayer(Player):
 
     """
     def choose(self, other):
+        if self.popularity == 0:
+            return self.debate
+        else:
+            return self.speech
 
 
 class VirFib():
@@ -276,6 +300,12 @@ class VirFib():
         self.value = value
 
     def next(self):
+        if self.value == 0:
+            result = VirFib(1)
+        else:
+            result = VirFib(self.value + self.previous)
+        result.previous = self.value
+        return result
 
     def __repr__(self):
         return "VirFib object, value " + str(self.value)
