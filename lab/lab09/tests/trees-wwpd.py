@@ -17,21 +17,17 @@ test = {
           2
           >>> t.label = t.branches[0].label
           >>> t
-          f331eaca6e463d6c1142a1cd9f252566
-          # locked
+          Tree(2, [Tree(2)])
           >>> t.branches.append(Tree(4, [Tree(8)]))
           >>> len(t.branches)
-          32cd207d18df99546ca7a56bc36ed715
-          # locked
+          2
           >>> t.branches[0]
-          6e3e150dcaf43b1aee92209a3f22f19f
-          # locked
+          Tree(2)
           >>> t.branches[1]
-          7120759eec12bcbd774a96e9ae93b1e9
-          # locked
+          Tree(4, [Tree(8)])
           """,
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'multiline': False
         }
       ],

@@ -7,7 +7,11 @@ def make_even(t):
     >>> t.branches[0].branches[0].label
     4
     """
-    "*** YOUR CODE HERE ***"
+    if t.label % 2 != 0:
+        t.label += 1
+    for b in t.branches:
+        make_even(b)
+    return
 
 
 def cumulative_mul(t):
