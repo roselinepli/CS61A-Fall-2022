@@ -39,7 +39,9 @@ class Email:
     'Bob'
     """
     def __init__(self, msg, sender_name, recipient_name):
-
+        self.msg = msg
+        self.sender_name = sender_name
+        self.recipient_name = recipient_name
 
 class Server:
     """Each Server has an instance attribute clients, which is a dictionary
@@ -54,7 +56,6 @@ class Server:
     def register_client(self, client: 'Client', client_name: str):
         """Takes a client object and client_name and adds them to the
         clients instance attribute."""
-
 
 
 class Client:
@@ -75,15 +76,14 @@ class Client:
     'CS 61A Rocks!'
     """
     def __init__(self, server, name):
-
+        self.server = server
+        self.name = name
 
     def compose(self, msg, recipient_name):
         """Send an email with the given message msg to the given recipient client."""
 
-
     def receive(self, email):
         """Take an email and add it to the inbox of this client."""
-
 
 
 def client_tests():
@@ -129,26 +129,16 @@ class Keyboard:
     3
     """
     def __init__(self, *args):
-        self.buttons = {}
-        for button in args:
-            self.buttons[button.pos] = button
+
 
     def press(self, pos):
         """Takes in a position of the buttton pressed, and
         returns that button's output."""
-        if pos in self.buttons.keys():
-            b = self.buttons[pos]
-            b.times_pressed += 1
-            return b.key
-        return ''
+
 
     def typing(self, typing_input):
         """Takes in a list of positions of buttons pressed, and
         returns the total output."""
-        accumulate = ''
-        for pos in typing_input:
-            accumulate += self.press(pos)
-        return accumulate
 
 
 class TeamMember:
@@ -160,9 +150,6 @@ class TeamMember:
         tracks a 'history' list, which contains the answers given by each
         individual team member.
         """
-        self.history = []
-        self.operation = operation
-        self.prev_member = prev_member
 
     def relay_calculate(self, x):
         """
@@ -171,22 +158,12 @@ class TeamMember:
         answer is passed to the next member's operation, etc. until we get
         to the current TeamMember, in which case we return the final 'result'.
         """
-        if not self.prev_member:
-            result = self.operation(x)
-            self.history = [result]
-        else:
-            prev_result = self.prev_member.relay_calculate(x)
-            result = self.operation(prev_result)
-            self.history = self.prev_member.history + [result]
-        return result
 
     def relay_history(self):
         """
         Returns a list of the answers given by each team member in the most
         recent relay the current TeamMember has participated in.
         """
-        return self.history
-
 
 class Cat:
     def __init__(self, name, owner, lives=9):
@@ -218,4 +195,3 @@ class Cat:
         "Tyler's Cat
         """
         name = owner + "'s cat"
-        return cls(name, owner)
