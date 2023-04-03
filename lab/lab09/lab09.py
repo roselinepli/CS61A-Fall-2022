@@ -81,7 +81,30 @@ def is_bst(t):
     >>> is_bst(t7)
     False
     """
-    "*** YOUR CODE HERE ***"
+    def bst_min(t):
+        """Return the min of t, if t has the structure of a valid BST."""
+        if t.is_leaf():
+            return t.label
+        return min(t.label, bst_min(t.branches[0]))
+
+    def bst_max(t):
+        """Return the max of t, if t has the structure of a valid BST."""
+        if t.is_leaf():
+            return t.label
+        return max(t.label, bst_max(t.branches[-1]))
+
+    if t.is_leaf():
+        return True
+    if len(t.branches) == 1:
+        c = t.branches[0]
+        return is_bst(c) and ((bst_max(c)) <= t.label or bst_min(c) > t.label)
+    elif len(t.branches) == 2:
+        c1, c2 = t.branches
+        valid_branches = is_bst(c1) and is_bst(c2)
+        return valid_branches and bst_max(c1) <= t.label and bst_min(c2) > t.label
+    else:
+        return False
+
 
 
 def add_trees(t1, t2):
@@ -119,18 +142,18 @@ def add_trees(t1, t2):
         5
       5
     """
-    if _____________:
-        return _____________
-    if _____________:
-        return _____________
-    new_label = _____________
-    t1_branches, t2_branches = _____________
-    length_t1, length_t2 = _____________
-    if _____________:
-        t1_branches += [_____________]
-    elif _____________:
-        t2_branches += [_____________]
-    return _____________
+    if not t1:
+        return t2
+    if not t2:
+        return t1
+    new_label = t1.label + t2.label
+    t1_branches, t2_branches = list(t1.branches), list(t2.branches)
+    length_t1, length_t2 = len(t1_branches), len(t2_branches)
+    if length_t1 < length_t2:
+        t1_branches += [None for _ in range(length_t1, length_t2)]
+    elif length_t1 > length_t2:
+        t2_branches += [None for _ in range(length_t2, length_t1)]
+    return Tree(new_label, [add_trees(branch1, branch2) for branch1, branch2 in zip(t1_branches, t2_branches)])
 
 
 class Tree:
