@@ -9,7 +9,6 @@ def make_even(t):
     """
     pass
 
-
 def cumulative_mul(t):
     """Mutates t so that each node's label becomes the product of all labels in
     the corresponding subtree rooted at t.
@@ -24,7 +23,6 @@ def cumulative_mul(t):
     Tree(5040, [Tree(60, [Tree(3), Tree(4), Tree(5)]), Tree(42, [Tree(7)])])
     """
     pass
-
 
 def prune_small(t, n):
     """Prune the tree mutatively, keeping only the n branches
@@ -44,6 +42,7 @@ def prune_small(t, n):
     Tree(6, [Tree(1), Tree(3, [Tree(1), Tree(2)])])
     """
     pass
+
 
 def is_bst(t):
     """Returns True if the Tree t has the structure of a valid BST.
@@ -108,7 +107,6 @@ def add_trees(t1, t2):
       5
     """
     pass
-
 
 class Tree:
     """
