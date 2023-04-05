@@ -45,7 +45,6 @@ def prune_small(t, n):
     """
     pass
 
-
 def is_bst(t):
     """Returns True if the Tree t has the structure of a valid BST.
 
@@ -72,7 +71,6 @@ def is_bst(t):
     False
     """
     pass
-
 
 
 def add_trees(t1, t2):
@@ -102,8 +100,7 @@ def add_trees(t1, t2):
     4
       6
       4
-    >>> print(add_trees(Tree(2, [Tree(3, [Tree(4), Tree(5)])]), \
-    Tree(2, [Tree(3, [Tree(4)]), Tree(5)])))
+    >>> print(add_trees(Tree(2, [Tree(3, [Tree(4), Tree(5)])]), Tree(2, [Tree(3, [Tree(4)]), Tree(5)])))
     4
       6
         8
