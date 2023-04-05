@@ -31,20 +31,8 @@ def convert_link(link):
     >>> convert_link(Link.empty)
     []
     """
-    # if link is Link.empty:
-    #     return []
-    # return [link.first] + convert_link(link.rest)
-
-    # res = []
-    # while link is not Link.empty:
-    #     res.append(link.first)
-    #     link = link.rest
-    # return res
-
     if link is Link.empty:
         return []
-    if type(link.first) == Link:
-        return [convert_link(link.first)] + convert_link(link.rest)
     return [link.first] + convert_link(link.rest)
 
 
@@ -69,12 +57,11 @@ def duplicate_link(link, val):
     if link is Link.empty:
         return
     elif link.first == val:
-        remaining = link.rest
-        link.rest = Link(val, remaining)
-        duplicate_link(remaining, val)
+        reamining = link.rest
+        link.rest = Link(val, reamining)
+        duplicate_link(reamining, val)
     else:
         duplicate_link(link.rest, val)
-
 
 def multiply_links(lst_of_links):
     """
@@ -108,8 +95,8 @@ def flip_two(s):
     >>> lnk
     Link(2, Link(1, Link(4, Link(3, Link(5)))))
     """
-    if s is Link.empty or s.rest is Link.empty:
-        return
+    if s is Link.empty and s.rest is Link.empty:
+        return s
     s.first, s.rest.first = s.rest.first, s.first
     flip_two(s.rest.rest)
 
@@ -123,7 +110,7 @@ def find_paths(t, entry):
     []
     """
     paths = []
-    if t.label == entry:
+    if t.is_leaf():
         paths.append([t.label])
     for b in t.branches:
         for path in find_paths(b, entry):
