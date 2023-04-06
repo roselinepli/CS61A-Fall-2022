@@ -7,7 +7,10 @@ def make_even(t):
     >>> t.branches[0].branches[0].label
     4
     """
-    pass
+    if t.label % 2 != 0:
+        t.label += 1
+    for b in t.branches:
+        make_even(b)
 
 def cumulative_mul(t):
     """Mutates t so that each node's label becomes the product of all labels in
@@ -22,7 +25,9 @@ def cumulative_mul(t):
     >>> otherTree
     Tree(5040, [Tree(60, [Tree(3), Tree(4), Tree(5)]), Tree(42, [Tree(7)])])
     """
-    pass
+    for b in t.branches:
+        cumulative_mul(b)
+        t.label *= b.label
 
 def prune_small(t, n):
     """Prune the tree mutatively, keeping only the n branches
@@ -41,7 +46,11 @@ def prune_small(t, n):
     >>> t3
     Tree(6, [Tree(1), Tree(3, [Tree(1), Tree(2)])])
     """
-    pass
+    while len(t.branches) > n:
+        largest = max(t.branches, key=lambda x: x.label)
+        t.branches.remove(largest)
+    for b in t.branches:
+        prune_small(b, n)
 
 
 def is_bst(t):
@@ -69,7 +78,26 @@ def is_bst(t):
     >>> is_bst(t7)
     False
     """
-    pass
+    def bst_min(t):
+        if t.is_leaf():
+            return t.label
+        return min(t.label, bst_min(t.branches[0]))
+
+    def bst_max(t):
+        if t.is_leaf():
+            return t.label
+        return max(t.label, bst_max(t.branches[-1]))
+
+    if t.is_leaf():
+        return True
+    elif len(t.branches) == 1:
+        c = t.branches[0]
+        return is_bst(c) and (bst_max(c) <= t.label or bst_min(c) > t.label)
+    elif len(t.branches) == 2:
+        c1, c2 = t.branches
+        return is_bst(c1) and is_bst(c2) and (bst_max(c1) <= t.label and bst_min(c2) > t.label)
+    else:
+        return False
 
 
 def add_trees(t1, t2):
@@ -106,7 +134,18 @@ def add_trees(t1, t2):
         5
       5
     """
-    pass
+    if not t1:
+        return t2
+    if not t2:
+        return t1
+    new_label = t1.label + t2.label
+    t1_branches, t2_branches = list(t1.branches), list(t2.branches)
+    t1_len, t2_len = len(t1_branches), len(t2_branches)
+    if t1_len < t2_len:
+        t1_branches += [None for _ in range(t1_len, t2_len)]
+    elif t1_len > t2_len:
+        t2_branches += [None for _ in range(t2_len, t1_len)]
+    return Tree(new_label, [add_trees(b1, b2) for b1, b2 in zip(t1_branches, t2_branches)])
 
 class Tree:
     """
