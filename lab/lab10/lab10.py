@@ -7,7 +7,7 @@ def insert_into_all(item, nested_list):
     >>> insert_into_all(0, nl)
     [[0], [0, 1, 2], [0, 3]]
     """
-    "*** YOUR CODE HERE ***"
+    return [[item] + lst for lst in nested_list]
 
 
 def subseqs(s):
@@ -20,11 +20,11 @@ def subseqs(s):
     >>> subseqs([])
     [[]]
     """
-    if ________________:
-        ________________
+    if not s:
+        return [[]]
     else:
-        ________________
-        ________________
+        subset = subseqs(s[1:])
+        return insert_into_all(s[0], subset) + subset
 
 
 def non_decrease_subseqs(s):
@@ -43,14 +43,14 @@ def non_decrease_subseqs(s):
     """
     def subseq_helper(s, prev):
         if not s:
-            return ____________________
+            return [[]]
         elif s[0] < prev:
-            return ____________________
+            return subseq_helper(s[1:], prev)
         else:
-            a = ______________________
-            b = ______________________
-            return insert_into_all(________, ______________) + ________________
-    return subseq_helper(____, ____)
+            a = subseq_helper(s[1:], s[0])
+            b = subseq_helper(s[1:], prev)
+            return insert_into_all(s[0], a) + b
+    return subseq_helper(s, 0)
 
 
 def num_trees(n):
@@ -73,7 +73,9 @@ def num_trees(n):
     429
 
     """
-    "*** YOUR CODE HERE ***"
+    if n == 1:
+        return 1
+    return sum(num_trees(k) * num_trees(n-k) for k in range(1, n))
 
 
 def partition_gen(n):
