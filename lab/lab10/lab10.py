@@ -226,12 +226,12 @@ def deep_len(lnk):
     >>> deep_len(levels)
     5
     """
-    if ______________:
+    if lnk is Link.empty:
         return 0
-    elif ______________:
+    elif not isinstance(lnk, Link):
         return 1
     else:
-        return _________________________
+        return deep_len(lnk.first) + deep_len(lnk.rest)
 
 
 def make_to_string(front, mid, back, empty_repr):
@@ -250,10 +250,10 @@ def make_to_string(front, mid, back, empty_repr):
     '()'
     """
     def printer(lnk):
-        if ______________:
-            return _________________________
+        if lnk is Link.empty:
+            return empty_repr
         else:
-            return _________________________
+            return front + str(lnk.first) + mid + printer(lnk.rest) + back
     return printer
 
 
@@ -270,7 +270,16 @@ def reverse_other(t):
     >>> t
     Tree(1, [Tree(8, [Tree(3, [Tree(5), Tree(4)]), Tree(6, [Tree(7)])]), Tree(2)])
     """
-    "*** YOUR CODE HERE ***"
+    def reverse_helper(t, need_reverse):
+        if t.is_leaf():
+            return
+        new_labs = [child.label for child in t.branches[::-1]]
+        for i in range(len(t.branches)):
+            child = t.branches[i]
+            reverse_helper(child, not need_reverse)
+            if need_reverse:
+                child.label = new_labs[i]
+    reverse_helper(t, True)
 
 
 class Link:
