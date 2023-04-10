@@ -69,7 +69,14 @@ def two_list(vals, counts):
     >>> c
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
-    "*** YOUR CODE HERE ***"
+    if not vals or not counts:
+        return Link.empty
+    else:
+        head = Link(vals[0])
+        tail = two_list(vals[1:], counts[1:])
+        for i in range(counts[0] - 1):
+            tail = Link(vals[0], tail)
+        return head + tail
 
 
 def add_d_leaves(t, v):
@@ -130,7 +137,21 @@ def add_d_leaves(t, v):
           10
         10
     """
-    "*** YOUR CODE HERE ***"
+    def add_leaves_at_depth_d(t, d):
+        if d == 0:
+            t.branches += [Tree(v)]
+        else:
+            for b in t.branches:
+                add_leaves_at_depth_d(b, d - 1)
+
+    def height(t):
+        if not t.branches:
+            return 0
+        return max(height(b) for b in t.branches) + 1
+
+    h = height(t)
+    for d in range(1, h):
+        add_leaves_at_depth_d(t, d)
 
 
 class Link:
