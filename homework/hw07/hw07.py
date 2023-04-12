@@ -16,13 +16,11 @@ def store_digits(n):
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     >>> link1 = Link(3, Link(Link(4), Link(5, Link(6))))
     """
-    if n == 0:
-        return Link.empty
-    else:
-        last_digit = n % 10
-        front_digits = n // 10
-        Link.rest = Link(last_digit)
-        return store_digits(front_digits) + Link.rest
+    link = Link.empty
+    while n > 0:
+        link = Link(n % 10, link)
+        n //= 10
+    return link
 
 
 def deep_map_mut(func, lnk):
@@ -69,14 +67,14 @@ def two_list(vals, counts):
     >>> c
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
-    if not vals or not counts:
-        return Link.empty
-    else:
-        head = Link(vals[0])
-        tail = two_list(vals[1:], counts[1:])
-        for i in range(counts[0] - 1):
-            tail = Link(vals[0], tail)
-        return head + tail
+    link = Link(None)
+    p = link
+    for i in range(len(vals)):
+        item = vals[i]
+        for _ in range(counts[i]):
+            p.rest = Link(item)
+            p = p.rest
+    return link.rest
 
 
 def add_d_leaves(t, v):
@@ -137,21 +135,11 @@ def add_d_leaves(t, v):
           10
         10
     """
-    def add_leaves_at_depth_d(t, d):
-        if d == 0:
-            t.branches += [Tree(v)]
-        else:
-            for b in t.branches:
-                add_leaves_at_depth_d(b, d - 1)
-
-    def height(t):
-        if not t.branches:
-            return 0
-        return max(height(b) for b in t.branches) + 1
-
-    h = height(t)
-    for d in range(1, h):
-        add_leaves_at_depth_d(t, d)
+    def add_leaves(t, d):
+        for b in t.branches:
+            add_leaves(b, d + 1)
+        t.branches.extend([Tree(v) for _ in range(d)])
+    add_leaves(t, 0)
 
 
 class Link:
