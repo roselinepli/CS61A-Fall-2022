@@ -16,7 +16,11 @@ def store_digits(n):
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     >>> link1 = Link(3, Link(Link(4), Link(5, Link(6))))
     """
-    pass
+    link = Link.empty
+    while n > 0:
+        link = Link(n % 10, link)
+        n //= 10
+    return link
 
 
 def deep_map_mut(func, lnk):
@@ -36,7 +40,13 @@ def deep_map_mut(func, lnk):
     >>> print(link1)
     <9 <16> 25 36>
     """
-    pass
+    if not lnk:
+        return
+    elif isinstance(lnk.first, Link):
+        deep_map_mut(func, lnk.first)
+    else:
+        lnk.first = func(lnk.first)
+    deep_map_mut(func, lnk.rest)
 
 
 def two_list(vals, counts):
@@ -57,7 +67,14 @@ def two_list(vals, counts):
     >>> c
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
-    pass
+    link = Link(None)
+    p = link
+    for i in range(len(vals)):
+        item = vals[i]
+        for _ in range(counts[i]):
+            p.rest = Link(item)
+            p = p.rest
+    return link.rest
 
 
 def add_d_leaves(t, v):
@@ -118,7 +135,11 @@ def add_d_leaves(t, v):
           10
         10
     """
-    pass
+    def add_leaves(t, d):
+        for b in t.branches:
+            add_leaves(b, d + 1)
+        t.branches.extend([Tree(v) for _ in range(d)])
+    add_leaves(t, 0)
 
 class Link:
     """A linked list.
