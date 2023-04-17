@@ -1,4 +1,8 @@
-(define (substitute s old new) 'YOUR-CODE-HERE)
+(define (substitute s old new)
+      (cond((null? s) '())
+           (pair? (car s) (cons(substitute car(s) old new) (substitute cdr(s) old new)))
+           ((equal? (car s) old) (cons new (substitute (cdr s) old new)))
+           (else (cons (car s) (substitute(cdr s) old new)))))
 
 ; Feel free to use these helper procedures in your solution
 (define (map fn s)
@@ -7,7 +11,7 @@
       (cons (fn (car s)) (map fn (cdr s)))))
 
 (define (filter fn s)
-  (cond 
+  (cond
     ((null? s)    nil)
     ((fn (car s)) (cons (car s) (filter fn (cdr s))))
     (else         (filter fn (cdr s)))))
