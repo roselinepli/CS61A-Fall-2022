@@ -15,20 +15,20 @@ def calc_eval(exp):
     3
     """
     if isinstance(exp, Pair):
-        operator = ____________  # UPDATE THIS FOR Q3
-        operands = ____________  # UPDATE THIS FOR Q3
+        operator = exp.first  # UPDATE THIS FOR Q3
+        operands = exp.rest  # UPDATE THIS FOR Q3
         if operator == 'and':  # and expressions
             return eval_and(operands)
         elif operator == 'define':  # define expressions
             return eval_define(operands)
         else:  # Call expressions
-            return calc_apply(___________, ___________)  # UPDATE THIS FOR Q3
+            return calc_apply(calc_eval(operator), operands.map(calc_eval))  # UPDATE THIS FOR Q3
     elif exp in OPERATORS:   # Looking up procedures
         return OPERATORS[exp]
     elif isinstance(exp, int) or isinstance(exp, bool):   # Numbers and booleans
         return exp
-    elif _________________:  # CHANGE THIS CONDITION FOR Q5
-        return _________________  # UPDATE THIS FOR Q5
+    elif exp in bindings:  # CHANGE THIS CONDITION FOR Q5
+        return bindings[exp]  # UPDATE THIS FOR Q5
 
 
 def calc_apply(op, args):
@@ -50,7 +50,14 @@ def floor_div(expr):
     >>> calc_eval(Pair("//", Pair(4, Pair(2, nil))))
     2
     """
-    # BEGIN SOLUTION Q3
+    dividend = expr.first
+    expr = expr.rest
+
+    while expr != nil:
+        divisor = expr.first
+        dividend //= divisor
+        expr = expr.rest
+    return dividend
 
 
 def eval_and(operands):
@@ -68,7 +75,13 @@ def eval_and(operands):
     >>> calc_eval(Pair("and", Pair(0, Pair(1, nil))))
     1
     """
-    # BEGIN SOLUTION Q4
+    curr, val = operands, True
+    while curr is not nil:
+        val = calc_eval(curr.first)
+        if val is False:
+            return False
+        curr = curr.rest
+    return val
 
 
 bindings = {}
@@ -85,7 +98,9 @@ def eval_define(expr):
     >>> calc_eval("c")
     1
     """
-    # BEGIN SOLUTION Q5
+    name, value = expr.first, calc_eval(expr.rest.first)
+    bindings[name] = value
+    return name
 
 
 OPERATORS = {"//": floor_div, "+": addition, "-": subtraction, "*": multiplication, "/": division}
