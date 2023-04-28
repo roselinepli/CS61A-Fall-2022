@@ -111,7 +111,10 @@ def repeated(f):
     >>> [g(1) for _, g in zip(range(5), repeated(lambda x: 2 * x))]
     [1, 2, 4, 8, 16]
     """
-
+    g = lambda x: x
+    while True:
+        g = lambda x: f(generated_func(x))
+        generated_func = yield g
 
 
 class Tree:
