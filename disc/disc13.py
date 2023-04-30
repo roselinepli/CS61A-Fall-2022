@@ -17,7 +17,7 @@
 #     else:
 #         a = paths(x+1, y)
 #         b = paths(x*2, y)
-#         return [[x] + i for i in a] + [[x] + i for i in b]
+#         return [[x] + i for i in a + b]
 
 
 # def reverse(lst):
@@ -91,9 +91,10 @@
 #     if link is Link.empty:
 #         return link
 #     elif isinstance(link.first, Link):
-#         return Link(deep_map(f, link.first), deep_map(f, link.rest))
+#         first = deep_map(f, link.first)
 #     else:
-#         return Link(f(link.first), deep_map(f, link.rest))
+#         first = f(link.first)
+#         return Link(first, deep_map(f, link.rest))
 
 
 def repeated(f):
@@ -113,8 +114,8 @@ def repeated(f):
     """
     g = lambda x: x
     while True:
-        g = lambda x: f(generated_func(x))
-        generated_func = yield g
+        yield g
+        g = (lambda g: lambda x: f(g(x)))(g)
 
 
 class Tree:
