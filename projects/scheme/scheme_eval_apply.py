@@ -34,7 +34,11 @@ def scheme_eval(expr, env, _=None):  # Optional third argument is ignored
         return scheme_forms.SPECIAL_FORMS[first](rest, env)
     else:
         # BEGIN PROBLEM 3
-        "*** YOUR CODE HERE ***"
+        def scheme_eval_with_one_agr(expr):
+            return scheme_eval(expr, env=env)
+        procudure = scheme_eval(first, env)
+        args = rest.map(scheme_eval_with_one_agr)
+        return scheme_apply(procudure, args, env)
         # END PROBLEM 3
 
 
