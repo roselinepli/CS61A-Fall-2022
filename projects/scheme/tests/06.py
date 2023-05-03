@@ -57,17 +57,14 @@ test = {
           scm> (define x 0)
           x
           scm> (begin (define x (+ x 1)) 42 (define y (+ x 1)))
-          1a9a3321b8b99a0f9291d89be986e74c
-          # locked
+          y
           scm> x
-          eb892a26497f936d1f6cae54aacc5f51
-          # locked
+          1
           scm> y
-          2b7cdec3904f986982cbd24a0bc12887
-          # locked
+          2
           """,
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'multiline': False
         },
         {
