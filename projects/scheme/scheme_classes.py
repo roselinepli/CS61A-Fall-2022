@@ -36,8 +36,8 @@ class Frame:
         # BEGIN PROBLEM 1
         if symbol in self.bindings:
             return self.bindings[symbol]
-        else:
-            self.lookup(self.parent, symbol)
+        elif self.parent:
+            return self.parent.lookup(symbol)
         # END PROBLEM 1
         raise SchemeError('unknown identifier: {0}'.format(symbol))
 
