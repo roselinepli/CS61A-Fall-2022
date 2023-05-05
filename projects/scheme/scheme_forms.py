@@ -128,7 +128,18 @@ def do_and_form(expressions, env):
     False
     """
     # BEGIN PROBLEM 12
-    "*** YOUR CODE HERE ***"
+    if len(expressions) == 0:
+        return True
+    val = True
+    while expressions != nil:
+        if expressions.rest is nil:
+            val = scheme_eval(expressions.first, env, True)
+        else:
+            val = scheme_eval(expressions.first, env, False)
+        if val is False:
+            return False
+        expressions = expressions.rest
+    return val
     # END PROBLEM 12
 
 
@@ -147,7 +158,18 @@ def do_or_form(expressions, env):
     6
     """
     # BEGIN PROBLEM 12
-    "*** YOUR CODE HERE ***"
+    if len(expressions) == 0:
+        return False
+    val = False
+    while expressions != nil:
+        if expressions.rest is nil:
+            val = scheme_eval(expressions.first, env, True)
+        else:
+            val = scheme_eval(expressions.first, env, False)
+        if val is not False:
+            return val
+        expressions = expressions.rest
+    return val
     # END PROBLEM 12
 
 
@@ -168,7 +190,11 @@ def do_cond_form(expressions, env):
             test = scheme_eval(clause.first, env)
         if is_scheme_true(test):
             # BEGIN PROBLEM 13
-            "*** YOUR CODE HERE ***"
+            if clause.rest == nil:
+                return test
+            elif clause.rest != nil:
+                val = eval_all(clause.rest, env)
+                return val
             # END PROBLEM 13
         expressions = expressions.rest
 
@@ -194,7 +220,13 @@ def make_let_frame(bindings, env):
         raise SchemeError('bad bindings list in let form')
     names = vals = nil
     # BEGIN PROBLEM 14
-    "*** YOUR CODE HERE ***"
+    while bindings != nil:
+        sub_bingdings = bindings.first
+        validate_form(sub_bingdings, 2, 2)
+        names = Pair(sub_bingdings.first, names)
+        vals = Pair(scheme_eval(sub_bingdings.rest.first, env), vals)
+        bindings = bindings.rest
+    validate_formals(names)
     # END PROBLEM 14
     return env.make_child_frame(names, vals)
 
@@ -236,7 +268,8 @@ def do_mu_form(expressions, env):
     formals = expressions.first
     validate_formals(formals)
     # BEGIN PROBLEM 11
-    "*** YOUR CODE HERE ***"
+    body = expressions.rest
+    return MuProcedure(formals, body)
     # END PROBLEM 11
 
 

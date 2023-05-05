@@ -13,11 +13,10 @@ test = {
           scm> (define g (lambda (x y) (f (+ x x))))
           g
           scm> (g 3 7)
-          ac8f8bf5e63b01fde95f04f5c6ce2820
-          # locked
+          13
           """,
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'multiline': False
         }
       ],

@@ -18,11 +18,10 @@ test = {
           scm> (cond ((= 1 1))
           ....       ((= 4 4) 'huh)
           ....       (else 'no))
-          c65729b823194bffbccc4a162f8653bd
-          # locked
+          #t
           """,
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'multiline': False
         }
       ],
