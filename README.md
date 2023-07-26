@@ -21,6 +21,6 @@ Description: Ants Vs. SomeBees is a strategic game where players battle as ants 
 GitHub Repo: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/ants
 
 <li>Scheme</li>
-Description: [Include a brief description of the project]<br />
-GitHub Repo: [Link to the GitHub repository]
+Description: The Scheme Editor allows you to write Scheme code by opening the .scm file in your text editor or directly in the editor for easy debugging.<br />
+GitHub Repo: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/scheme
 </ul>
