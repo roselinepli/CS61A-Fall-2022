@@ -1,6 +1,6 @@
 ## Dice Game of Hog
 
-<img src= />
+<img src="HogGame.png" alt="hogGame" height="350" width="650" />
 
 ## Description
 <p> Hog is an engaging dice game where two players take turns trying to be the first to reach at least GOAL total points (defaulting to 100). 
