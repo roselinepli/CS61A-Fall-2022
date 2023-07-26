@@ -9,18 +9,18 @@ During this incredible learning journey, I completed four projects that were bot
 
 <ul>
 <li>Hog</li>
-Description: [Include a brief description of the project]<br />
-GitHub Repository: [Link to the GitHub repository]
+Description: Hog is a dice game where two players aim to reach at least GOAL points (default: 100). <br />
+GitHub Repo: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/hog
 
 <li>Cats</li>
 Description: [Include a brief description of the project]<br />
-GitHub Repository: [Link to the GitHub repository]
+GitHub Repo: [Link to the GitHub repository]
 
 <li>Ants</li>
 Description: [Include a brief description of the project] <br />
-GitHub Repository: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/ants
+GitHub Repo: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/ants
 
 <li>Scheme</li>
 Description: [Include a brief description of the project]<br />
-GitHub Repository: [Link to the GitHub repository]
+GitHub Repo: [Link to the GitHub repository]
 </ul>
