@@ -1,6 +1,6 @@
 ## Typing Speed and Autocorrect Program
 
-<img src="Typing.png" alt="typing" height="300" width="750" />
+<img src="Typing.png" alt="typing" height="350" width="650" />
 
 ## Description
 <p>This project involves creating a program to measure typing speed and implementing typing autocorrect. 
