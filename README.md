@@ -5,9 +5,22 @@ This is my own learning record of CS61A Fall 2022, the course had already finish
 * Text: http://composingprograms.com/
 
 # Projects
-<ol>
-  <li>Hog</li>
-  <li>Scheme</li>
-  <li>Ants</li>
-  <li>Cat</li>
-</ol>
+During this incredible learning journey, I completed four projects that were both educational and fun. These projects have allowed me to enhance my skills and knowledge in programming and have been an exciting experience overall.
+
+<ul>
+<li>Hog</li>
+Description: [Include a brief description of the project]<br />
+GitHub Repository: [Link to the GitHub repository]
+
+<li>Cats</li>
+Description: [Include a brief description of the project]<br />
+GitHub Repository: [Link to the GitHub repository]
+
+<li>Ants</li>
+Description: [Include a brief description of the project] <br />
+GitHub Repository: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/ants
+
+<li>Scheme</li>
+Description: [Include a brief description of the project]<br />
+GitHub Repository: [Link to the GitHub repository]
+</ul>
