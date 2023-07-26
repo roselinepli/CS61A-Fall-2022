@@ -13,11 +13,11 @@ Description: Hog is a dice game where two players aim to reach at least GOAL poi
 GitHub Repo: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/hog
 
 <li>Cats</li>
-Description: [Include a brief description of the project]<br />
-GitHub Repo: [Link to the GitHub repository]
+Description: This project involves creating a program to measure typing speed and implementing typing autocorrect.<br />
+GitHub Repo: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/cats
 
 <li>Ants</li>
-Description: [Include a brief description of the project] <br />
+Description: Ants Vs. SomeBees is a strategic game where players battle as ants defending their colony against invading bees in a series of turns. <br />
 GitHub Repo: https://github.com/roselinepli/CS61A-Fall-2022/tree/main/projects/ants
 
 <li>Scheme</li>
