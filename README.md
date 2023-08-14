@@ -2,7 +2,7 @@
 This is my own learning record of CS61A Fall 2022, the course had already finished when I first created this repo.
 
 * course: https://inst.eecs.berkeley.edu/~cs61a/fa22/
-* Text: http://composingprograms.com/
+* Text: https://www.composingprograms.com/
 
 # Projects
 During this incredible learning journey, I completed four projects that were both educational and fun. These projects have allowed me to enhance my skills and knowledge in programming and have been an exciting experience overall.
